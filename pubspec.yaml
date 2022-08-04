@@ -1,0 +1,71 @@
+name: settings_kosmos
+description: A new Flutter package project.
+version: 1.0.1
+homepage: none
+publish_to: none
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  dartdoc: ^6.0.0
+
+  ####################
+  # Riverpod & Hooks #
+  ####################
+  hooks_riverpod: ^1.0.3
+
+  ###############
+  # Translating #
+  ###############
+  easy_localization: ^3.0.1
+
+  ##########
+  # Get_it #
+  ##########
+  get_it: ^7.2.0
+
+  #########
+  # Dartz #
+  #########
+  dartz: ^0.10.1
+  
+  ###############################
+  # Auto_Route And Url handling #
+  ###############################
+  auto_route: ^4.2.1
+
+  flutter_svg: ^1.1.1+1
+  url_launcher: ^6.1.5
+  cached_network_image: ^3.2.1 
+  
+  ##################
+  # Kosmos Package #
+  ##################
+  core_kosmos:
+    git:
+      publish_to: none
+      url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
+      ref: main
+
+  ui_kosmos_v4:
+    git:
+      publish_to: none
+      url: https://gitlab+deploy-token-1156709:fR3FsBtxfwwKuM43HyWp@gitlab.com/package16/package-ui-kosmos.git
+      ref: main
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  assets:
+    - assets/svg/
+    - assets/images/
+    - assets/images/img_default_user.png
