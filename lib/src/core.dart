@@ -95,6 +95,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                   Container(
                     width: formatWidth(92),
                     height: formatWidth(92),
+                    clipBehavior: Clip.hardEdge,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: userImage != null
                         ? CachedNetworkImage(
