@@ -526,11 +526,33 @@ class NodePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          node.value1.tr(),
-          style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+        SizedBox(
+          height: formatHeight(35),
+          child: Stack(
+            children: [
+              Center(
+                child: Text(
+                  node.value1.tr(),
+                  style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                left: 0,
+                child: InkWell(
+                  onTap: () => AutoRouter.of(context).navigateBack(),
+                  child: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Colors.black,
+                    size: formatWidth(18),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        sh(10),
+        sh(20),
         ...node.value2
             .map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
