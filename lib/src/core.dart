@@ -230,6 +230,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           titleStyle: themeData?.titleStyle,
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
+          icon: e.data!.prefix,
         );
       }
     case SettingsType.security:
@@ -415,6 +416,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           titleStyle: themeData?.titleStyle,
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
+          icon: e.data!.prefix,
         );
       }
     case SettingsType.facebook:
