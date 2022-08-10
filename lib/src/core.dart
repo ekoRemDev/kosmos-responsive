@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_package.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -205,13 +206,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
   switch (e.type) {
     case SettingsType.personnalData:
       if (e.data!.builder != null) {
-        return e.data!.builder!(context);
+        return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
           isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
-              await e.data!.onTap!(context);
+              await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
               if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
@@ -238,7 +239,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
             if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
@@ -271,7 +272,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
             if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
@@ -304,7 +305,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
             if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
@@ -337,7 +338,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
             if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
@@ -370,7 +371,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
             if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
@@ -391,13 +392,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.custom:
       if (e.data?.builder != null) {
-        return e.data!.builder!(context);
+        return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
           isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
-              await e.data!.onTap!(context);
+              await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
               if (getResponsiveValue(context, defaultValue: true, tablet: false, phone: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
@@ -423,7 +424,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       return SettingsCellule(
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           }
         },
         iconBackgroundColor: const Color(0xFF0074F6),
@@ -441,7 +442,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       return SettingsCellule(
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           }
         },
         svg: Center(
@@ -458,7 +459,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       return SettingsCellule(
         onClick: () async {
           if (e.data?.onTap != null) {
-            await e.data!.onTap!(context);
+            await e.data!.onTap!(context, ref);
           }
         },
         iconBackgroundColor: const Color(0xFF00acee),
@@ -473,6 +474,51 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         title: "settings.twitter.title".tr(),
         titleStyle: themeData?.titleStyle,
       );
+    case SettingsType.linkedin:
+      return SettingsCellule(
+        onClick: () async {
+          if (e.data?.onTap != null) {
+            await e.data!.onTap!(context, ref);
+          }
+        },
+        iconBackgroundColor: const Color(0xFF007AB9),
+        svg: Center(
+          child: SvgPicture.asset(
+            "assets/svg/linkedin.svg",
+            package: "settings_kosmos",
+            width: themeData?.iconSize ?? formatWidth(16),
+            color: themeData?.iconColor ?? Colors.white,
+          ),
+        ),
+        title: "settings.twitter.title".tr(),
+        titleStyle: themeData?.titleStyle,
+      );
+    case SettingsType.switcher:
+      if (e.data?.builder != null) {
+        return e.data!.builder!(context, ref);
+      } else {
+        return SettingsCellule(
+          switchNotif: CupertinoSwitch(
+            value: e.data!.switchValue!(ref),
+            onChanged: (val) async {
+              if (e.data?.onSwicth != null) {
+                await e.data!.onSwicth!(context, ref, val);
+              }
+            },
+          ),
+          isActive: getResponsiveValue(context, defaultValue: true, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          onClick: () async {
+            if (e.data?.onSwicth != null) {
+              await e.data!.onSwicth!(context, ref, !e.data!.switchValue!(ref));
+            }
+          },
+          title: e.data!.title,
+          titleStyle: themeData?.titleStyle,
+          subtitle: e.data!.subTitle,
+          subtitleStyle: themeData?.subTitleStyle,
+          icon: e.data!.prefix,
+        );
+      }
   }
 }
 
@@ -503,7 +549,7 @@ class NodePage extends ConsumerWidget {
     final SettingsThemeData? themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
     if (node != null && node!.data?.childBuilder != null) {
-      return node!.data!.childBuilder!(context);
+      return node!.data!.childBuilder!(context, ref);
     }
 
     return Column(

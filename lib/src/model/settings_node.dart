@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum SettingsType {
   personnalData,
@@ -13,6 +14,8 @@ enum SettingsType {
   facebook,
   instagram,
   twitter,
+  linkedin,
+  switcher,
 }
 
 class SettingsNode {
@@ -53,16 +56,20 @@ class SettingsData {
   final String? title;
   final String? subTitle;
   final Widget? prefix;
-  final Function(BuildContext)? onTap;
-  final Widget Function(BuildContext)? builder;
-  final Widget Function(BuildContext)? childBuilder;
+  final bool Function(WidgetRef)? switchValue;
+  final Function(BuildContext, WidgetRef)? onTap;
+  final Function(BuildContext, WidgetRef, bool)? onSwicth;
+  final Widget Function(BuildContext, WidgetRef)? builder;
+  final Widget Function(BuildContext, WidgetRef)? childBuilder;
 
   const SettingsData({
     this.title,
     this.subTitle,
     this.prefix,
     this.onTap,
+    this.onSwicth,
     this.builder,
     this.childBuilder,
+    this.switchValue,
   });
 }
