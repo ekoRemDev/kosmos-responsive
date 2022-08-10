@@ -445,11 +445,15 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             await e.data!.onTap!(context, ref);
           }
         },
-        svg: Center(
-          child: SvgPicture.asset(
-            "assets/svg/instaLink.svg",
-            package: "settings_kosmos",
-            fit: BoxFit.cover,
+        svg: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: SvgPicture.asset(
+              "assets/svg/instaLink.svg",
+              package: "settings_kosmos",
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         title: "settings.instagram.title".tr(),
