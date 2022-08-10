@@ -503,6 +503,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       } else {
         return SettingsCellule(
           switchNotif: CupertinoSwitch(
+            activeColor: e.data!.activeSwitchColor,
             value: e.data!.switchValue!(ref),
             onChanged: (val) async {
               if (e.data?.onSwicth != null) {

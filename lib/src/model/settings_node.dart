@@ -61,6 +61,7 @@ class SettingsData {
   final Function(BuildContext, WidgetRef, bool)? onSwicth;
   final Widget Function(BuildContext, WidgetRef)? builder;
   final Widget Function(BuildContext, WidgetRef)? childBuilder;
+  final Color? activeSwitchColor;
 
   const SettingsData({
     this.title,
@@ -71,5 +72,6 @@ class SettingsData {
     this.builder,
     this.childBuilder,
     this.switchValue,
+    this.activeSwitchColor,
   });
 }
