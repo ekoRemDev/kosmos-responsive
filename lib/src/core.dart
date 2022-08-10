@@ -494,7 +494,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             color: themeData?.iconColor ?? Colors.white,
           ),
         ),
-        title: "settings.twitter.title".tr(),
+        title: "settings.linkedin.title".tr(),
         titleStyle: themeData?.titleStyle,
       );
     case SettingsType.switcher:
