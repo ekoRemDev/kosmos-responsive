@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:dartz/dartz.dart' as dz;
-import 'package:ui_kosmos_v4/settings_cellule/settings_cellule.dart';
+import 'package:settings_kosmos/src/widget/alert.dart';
+import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../settings_kosmos.dart';
@@ -21,6 +22,7 @@ final settingsProvider = ChangeNotifierProvider<SettingsProvider>((ref) {
 
 class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
+  final Function? deleteAccountFunction;
 
   final SettingsThemeData? theme;
   final String? themeName;
@@ -38,6 +40,7 @@ class ResponsiveSettings extends HookConsumerWidget {
     required this.nodes,
     this.theme,
     this.themeName,
+    this.deleteAccountFunction,
     this.showUserImage = true,
     this.showUserProfil = true,
     this.showEditedBy = true,
@@ -85,22 +88,18 @@ class ResponsiveSettings extends HookConsumerWidget {
                           context: context,
                           builder: (_) {
                             return CupertinoActionSheet(
-                              cancelButton: CupertinoActionSheet(
-                                actions: [
-                                  CupertinoActionSheetAction(
-                                    onPressed: () {
-                                      Navigator.of(_).pop(false);
-                                    },
-                                    child: Text(
-                                      "utils.cancel".tr(),
-                                      style: TextStyle(
-                                        color: const Color(0xFF007AFF),
-                                        fontSize: sp(20),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                              cancelButton: CupertinoActionSheetAction(
+                                onPressed: () {
+                                  Navigator.of(_).pop(false);
+                                },
+                                child: Text(
+                                  "utils.cancel".tr(),
+                                  style: TextStyle(
+                                    color: const Color(0xFF007AFF),
+                                    fontSize: sp(20),
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                ],
+                                ),
                               ),
                               title: Text(
                                 "settings.what-you-want-do".tr(),
@@ -142,6 +141,31 @@ class ResponsiveSettings extends HookConsumerWidget {
                             );
                           },
                         );
+                        if (showBoxAlertToDeleteAccount) {
+                          final rep = await AlertBox.show<bool>(
+                            context: context,
+                            title: "settings.delete-account".tr(),
+                            message: "settings.delete-account-confirm".tr(),
+                            actions: [
+                              (_) => CTA.primary(
+                                    textButton: "utils.yes".tr(),
+                                    width: formatWidth(207),
+                                    textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
+                                    onTap: () => Navigator.of(_).pop(true),
+                                  ),
+                              (_) => CTA.secondary(
+                                    textButton: "utils.non".tr(),
+                                    width: formatWidth(207),
+                                    textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                                    onTap: () => Navigator.of(_).pop(false),
+                                  ),
+                            ],
+                          );
+                          if (rep == true) {
+                            if (deleteAccountFunction != null) await deleteAccountFunction!();
+                            AutoRouter.of(context).replaceNamed("/logout");
+                          }
+                        }
                       },
                       child: Icon(
                         Icons.more_horiz,
