@@ -80,8 +80,68 @@ class ResponsiveSettings extends HookConsumerWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        //TODO event pick image, or delete account or logout
+                      onTap: () async {
+                        final showBoxAlertToDeleteAccount = await showCupertinoModalPopup(
+                          context: context,
+                          builder: (_) {
+                            return CupertinoActionSheet(
+                              cancelButton: CupertinoActionSheet(
+                                actions: [
+                                  CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.of(_).pop(false);
+                                    },
+                                    child: Text(
+                                      "utils.cancel".tr(),
+                                      style: TextStyle(
+                                        color: const Color(0xFF007AFF),
+                                        fontSize: sp(20),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              title: Text(
+                                "settings.what-you-want-do".tr(),
+                                style: TextStyle(
+                                  fontSize: sp(13),
+                                  color: const Color(0xFF8F8F8F),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              actions: [
+                                CupertinoActionSheetAction(
+                                  isDestructiveAction: true,
+                                  onPressed: () {
+                                    AutoRouter.of(context).replaceNamed("/logout");
+                                  },
+                                  child: Text(
+                                    "settings.logout".tr(),
+                                    style: TextStyle(
+                                      color: const Color(0xFFFF3B30),
+                                      fontSize: sp(20),
+                                    ),
+                                  ),
+                                ),
+                                CupertinoActionSheetAction(
+                                  isDestructiveAction: true,
+                                  onPressed: () {
+                                    Navigator.of(_).pop(true);
+                                  },
+                                  child: Text(
+                                    "settings.delete-profil".tr(),
+                                    style: TextStyle(
+                                      color: const Color(0xFFFF3B30),
+                                      fontSize: sp(20),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: Icon(
                         Icons.more_horiz,
