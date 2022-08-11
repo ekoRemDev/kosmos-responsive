@@ -141,7 +141,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             );
                           },
                         );
-                        if (showBoxAlertToDeleteAccount) {
+                        if (showBoxAlertToDeleteAccount == true) {
                           final rep = await AlertBox.show<bool>(
                             context: context,
                             title: "settings.delete-account".tr(),
