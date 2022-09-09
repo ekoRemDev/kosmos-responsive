@@ -22,7 +22,7 @@ dependencies:
   ###############
   # Translating #
   ###############
-  easy_localization: 3.0.1
+  easy_localization: ^3.0.1
 
   ##########
   # Get_it #
