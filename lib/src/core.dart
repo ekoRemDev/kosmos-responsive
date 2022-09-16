@@ -294,7 +294,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
           isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
@@ -322,7 +321,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       }
     case SettingsType.security:
       return SettingsCellule(
-        backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
         isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
@@ -356,7 +354,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.payment:
       return SettingsCellule(
-        backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
         isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
@@ -390,7 +387,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.share:
       return SettingsCellule(
-        backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
         isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
@@ -424,7 +420,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.help:
       return SettingsCellule(
-        backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
         isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
@@ -458,7 +453,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.link:
       return SettingsCellule(
-        backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
         isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
@@ -486,7 +480,6 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          backgroundColor: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) && ref.watch(settingsProvider).isActive(e.tag) ? themeData?.buttonBackgroundActiveColor : null,
           isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
