@@ -70,7 +70,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Opacity(
-                      opacity: AutoRouter.of(context).canNavigateBack ? 1 : 0,
+                      opacity: AutoRouter.of(context).canNavigateBack && getResponsiveValue(context, defaultValue: false, tablet: false, phone: true) ? 1 : 0,
                       child: InkWell(
                         onTap: () {
                           if (AutoRouter.of(context).canNavigateBack) AutoRouter.of(context).navigateBack();
