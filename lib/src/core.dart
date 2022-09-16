@@ -672,19 +672,20 @@ class NodePage extends ConsumerWidget {
                   style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ),
-              Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                child: InkWell(
-                  onTap: () => AutoRouter.of(context).navigateBack(),
-                  child: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: Colors.black,
-                    size: formatWidth(18),
+              if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true))
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  child: InkWell(
+                    onTap: () => AutoRouter.of(context).navigateBack(),
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.black,
+                      size: formatWidth(18),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
