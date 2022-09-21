@@ -25,7 +25,6 @@ class SettingsProvider with ChangeNotifier {
   }
 
   bool isActive(String tag) {
-    printInDebug("[Settings] isActive: ${activeNodes.any((e) => e.value2 == tag)}");
     return activeNodes.any((e) => e.value2 == tag);
   }
 }
