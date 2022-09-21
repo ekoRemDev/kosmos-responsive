@@ -9,12 +9,12 @@ class SettingsProvider with ChangeNotifier {
 
   void updateNode(int level, String tag) {
     for (final e in activeNodes) {
+      printInDebug("[Settings] level: $level vs ${e.value1}");
       if (e.value1 >= level) {
         activeNodes.remove(e);
       }
     }
     activeNodes.add(Tuple2(level, tag));
-    printInDebug("[Settings] level: $level");
     printInDebug("[Settings] activeNodes: $activeNodes");
     notifyListeners();
   }
