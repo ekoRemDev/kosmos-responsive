@@ -287,7 +287,6 @@ class ResponsiveSettings extends HookConsumerWidget {
 
 /// Node builder
 buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? themeData, WidgetRef ref, [int level = 0]) {
-  printInDebug("[SettingsNodeBuilder] Node ${e.tag} is active ? ${ref.watch(settingsProvider).isActive(e.tag)}");
   switch (e.type) {
     case SettingsType.personnalData:
       if (e.data!.builder != null) {
