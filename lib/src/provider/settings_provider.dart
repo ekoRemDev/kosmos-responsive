@@ -9,7 +9,7 @@ class SettingsProvider with ChangeNotifier {
 
   void updateNode(int level, String tag) {
     for (final e in activeNodes) {
-      if (e.value1 >= level + 1) {
+      if (e.value1 >= level) {
         activeNodes.remove(e);
       }
     }
