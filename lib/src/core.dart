@@ -316,6 +316,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
+          activeIcon: e.data?.activePrefix,
         );
       }
     case SettingsType.security:
@@ -338,12 +339,20 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             }
           }
         },
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/lock.svg",
             package: "settings_kosmos",
             width: themeData?.iconSize ?? formatWidth(16),
             color: themeData?.iconColor ?? Colors.white,
+          ),
+        ),
+        activeIcon: Center(
+          child: SvgPicture.asset(
+            "assets/svg/lock.svg",
+            package: "settings_kosmos",
+            width: themeData?.iconSize ?? formatWidth(16),
+            color: themeData?.activeIconColor ?? Colors.white,
           ),
         ),
         title: "settings.security.title".tr(),
@@ -371,12 +380,20 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             }
           }
         },
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/credit-card.svg",
             package: "settings_kosmos",
             width: themeData?.iconSize ?? formatWidth(16),
             color: themeData?.iconColor ?? Colors.white,
+          ),
+        ),
+        activeIcon: Center(
+          child: SvgPicture.asset(
+            "assets/svg/credit-card.svg",
+            package: "settings_kosmos",
+            width: themeData?.iconSize ?? formatWidth(16),
+            color: themeData?.activeIconColor ?? Colors.white,
           ),
         ),
         title: "settings.payment.title".tr(),
@@ -404,12 +421,20 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             }
           }
         },
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/share.svg",
             package: "settings_kosmos",
             width: themeData?.iconSize ?? formatWidth(16),
             color: themeData?.iconColor ?? Colors.white,
+          ),
+        ),
+        activeIcon: Center(
+          child: SvgPicture.asset(
+            "assets/svg/share.svg",
+            package: "settings_kosmos",
+            width: themeData?.iconSize ?? formatWidth(16),
+            color: themeData?.activeIconColor ?? Colors.white,
           ),
         ),
         title: "settings.share.title".tr(),
@@ -437,12 +462,20 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             }
           }
         },
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/help.svg",
             package: "settings_kosmos",
             width: themeData?.iconSize ?? formatWidth(16),
             color: themeData?.iconColor ?? Colors.white,
+          ),
+        ),
+        activeIcon: Center(
+          child: SvgPicture.asset(
+            "assets/svg/help.svg",
+            package: "settings_kosmos",
+            width: themeData?.iconSize ?? formatWidth(16),
+            color: themeData?.activeIconColor ?? Colors.white,
           ),
         ),
         title: "settings.help.title".tr(),
@@ -471,6 +504,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           }
         },
         icon: e.data?.prefix,
+        activeIcon: e.data?.prefix,
         title: e.data?.title,
         titleStyle: themeData?.titleStyle,
       );
@@ -502,6 +536,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
+          activeIcon: e.data!.prefix,
         );
       }
     case SettingsType.facebook:
@@ -512,7 +547,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           }
         },
         iconBackgroundColor: const Color(0xFF0074F6),
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/facebook.svg",
             package: "settings_kosmos",
@@ -529,7 +564,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             await e.data!.onTap!(context, ref);
           }
         },
-        svg: SizedBox(
+        icon: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: Center(
@@ -551,7 +586,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           }
         },
         iconBackgroundColor: const Color(0xFF00acee),
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/twitter.svg",
             package: "settings_kosmos",
@@ -570,7 +605,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           }
         },
         iconBackgroundColor: const Color(0xFF007AB9),
-        svg: Center(
+        icon: Center(
           child: SvgPicture.asset(
             "assets/svg/linkedin.svg",
             package: "settings_kosmos",
@@ -606,6 +641,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
+          activeIcon: e.data?.prefix,
         );
       }
   }

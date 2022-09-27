@@ -56,6 +56,7 @@ class SettingsData {
   final String? title;
   final String? subTitle;
   final Widget? prefix;
+  final Widget? activePrefix;
   final bool Function(WidgetRef)? switchValue;
   final Function(BuildContext, WidgetRef)? onTap;
   final Function(BuildContext, WidgetRef, bool)? onSwicth;
@@ -67,6 +68,7 @@ class SettingsData {
     this.title,
     this.subTitle,
     this.prefix,
+    this.activePrefix,
     this.onTap,
     this.onSwicth,
     this.builder,
