@@ -212,9 +212,97 @@ class ResponsiveSettings extends HookConsumerWidget {
                         right: 0,
                         left: 0,
                         bottom: 0,
-                        child: SvgPicture.asset(
-                          'assets/svg/pen.svg',
-                          height: 30,
+                        child: InkWell(
+                          onTap: () async {
+                            await showCupertinoModalPopup(
+                              context: context,
+                              builder: (_) {
+                                return CupertinoActionSheet(
+                                  cancelButton: CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.of(_).pop(false);
+                                    },
+                                    child: Text(
+                                      "utils.cancel".tr(),
+                                      style: TextStyle(
+                                        color: const Color(0xFF007AFF),
+                                        fontSize: sp(20),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    "settings.what-you-want-do".tr(),
+                                    style: TextStyle(
+                                      fontSize: sp(13),
+                                      color: const Color(0xFF8F8F8F),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: [
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () {
+                                        //AutoRouter.of(context).replaceNamed("/logout");
+                                      },
+                                      //Prendre une photo/video
+                                      child: Text(
+                                        "settings.take-picture".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                        ),
+                                      ),
+                                    ),
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () {
+                                        Navigator.of(_).pop(true);
+                                      },
+                                      child: Text(
+                                        "settings.modify-picture".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            // if (showBoxAlertToModifyProfilPicture == true) {
+                            //   final rep = await AlertBox.show<bool>(
+                            //     context: context,
+                            //     title: "settings.modify-picture".tr(),
+                            //     message: "settings.modify-picture-confirm".tr(),
+                            //     actions: [
+                            //       (_) => CTA.primary(
+                            //             textButton: "utils.yes".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(true),
+                            //           ),
+                            //       (_) => CTA.secondary(
+                            //             textButton: "utils.non".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(false),
+                            //           ),
+                            //     ],
+                            //   );
+                            //   if (rep == true) {
+                            //     if (deleteAccountFunction != null) await deleteAccountFunction!();
+                            //     AutoRouter.of(context).replaceNamed("/logout");
+                            //   }
+                            // }
+                          },
+                          child: SvgPicture.asset(
+                            'assets/svg/pen.svg',
+                            package: "settings_kosmos",
+                            height: 30,
+                          ),
                         ),
                       )
                     ],
