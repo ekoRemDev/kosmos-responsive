@@ -187,49 +187,68 @@ class ResponsiveSettings extends HookConsumerWidget {
                 ),
                 sh(25),
                 if (showUserImage) ...[
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        userImage != null
-                            ? SizedBox(
-                              width: formatWidth(102),
-                              height: formatHeight(102),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(1200),
-                                child: CachedNetworkImage(
-                                  imageUrl: userImage!,
-                                  placeholder: (_, __) => Image.asset(
-                                    "assets/images/img_default_user.png",
-                                    package: "settings_kosmos",
-                                    fit: BoxFit.cover,
+                  Stack(
+                    children: [
+                      userImage != null
+                      ? CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(userImage!),
+                        // child: CachedNetworkImage(
+                        //   imageUrl: userImage!,
+                        //   placeholder: (_, __) => Image.asset(
+                        //     "assets/images/img_default_user.png",
+                        //     package: "settings_kosmos",
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        //   errorWidget: (_, __, ___) => Image.asset(
+                        //     "assets/images/img_default_user.png",
+                        //     package: "settings_kosmos",
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        //   fit: BoxFit.cover,
+                        // ),
+                      )
+                      : CircleAvatar(
+                        child: Image.asset(
+                          "assets/images/img_default_user.png",
+                          package: "settings_kosmos",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        left: 10,
+                        bottom: 0,
+                        child: InkWell(
+                          onTap: () async {
+                            await showCupertinoModalPopup(
+                              context: context,
+                              builder: (_) {
+                                return CupertinoActionSheet(
+                                  cancelButton: CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.of(_).pop(false);
+                                    },
+                                    child: Text(
+                                      "utils.cancel".tr(),
+                                      style: TextStyle(
+                                        color: const Color(0xFF007AFF),
+                                        fontSize: sp(20),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                   ),
-                                  errorWidget: (_, __, ___) => Image.asset(
-                                    "assets/images/img_default_user.png",
-                                    package: "settings_kosmos",
-                                    fit: BoxFit.cover,
+                                  title: Text(
+                                    "settings.what-you-want-do".tr(),
+                                    style: TextStyle(
+                                      fontSize: sp(13),
+                                      color: const Color(0xFF8F8F8F),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                            : CircleAvatar(
-                              child: Image.asset(
-                                "assets/images/img_default_user.png",
-                                package: "settings_kosmos",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                        Positioned(
-                          right: 0,
-                          left: 0,
-                          bottom: 0,
-                          child: InkWell(
-                            onTap: () async {
-                              await showCupertinoModalPopup(
-                                context: context,
-                                builder: (_) {
-                                  return CupertinoActionSheet(
-                                    cancelButton: CupertinoActionSheetAction(
+                                  actions: [
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
                                       onPressed: () {
                                         Navigator.of(_).pop(false);
                                       },
