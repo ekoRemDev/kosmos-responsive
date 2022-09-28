@@ -1,9 +1,12 @@
 // ignore_for_file: must_be_immutable, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_package.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ import 'package:dartz/dartz.dart' as dz;
 import 'package:settings_kosmos/src/widget/alert.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../src/services/firebase/storage.dart';
 
 import '../settings_kosmos.dart';
 
@@ -24,8 +28,11 @@ class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
   final Function? deleteAccountFunction;
 
+  File? profilPicture;
+
   final SettingsThemeData? theme;
   final String? themeName;
+  final String? userId;
 
   final bool showUserProfil;
   final bool showUserImage;
@@ -35,9 +42,11 @@ class ResponsiveSettings extends HookConsumerWidget {
   final String? userEmail;
   final String? userImage;
 
-  const ResponsiveSettings({
+  ResponsiveSettings({
     Key? key,
     required this.nodes,
+    this.profilPicture,
+    this.userId,
     this.theme,
     this.themeName,
     this.deleteAccountFunction,
@@ -183,8 +192,9 @@ class ResponsiveSettings extends HookConsumerWidget {
                   Stack(
                     children: [
                       Container(
-                        width: formatWidth(92),
-                        height: formatWidth(92),
+                        width: formatWidth(102),
+                        height: formatWidth(102),
+                        padding: EdgeInsets.all(formatHeight(10)),
                         clipBehavior: Clip.hardEdge,
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         child: userImage != null
@@ -255,9 +265,14 @@ class ResponsiveSettings extends HookConsumerWidget {
                                         ),
                                       ),
                                     ),
+                                    //Bibliothèque
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        File? _image = await FirebaseStorageController().selectFile(userId!);
+                                        if (_image != null) {
+                                          profilPicture = _image;
+                                        }
                                         Navigator.of(_).pop(true);
                                       },
                                       child: Text(
@@ -298,6 +313,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                             //   }
                             // }
                           },
+                          //storageservice
+                          //getdowlondurl
+                          //updatefirebaseuser
+
                           child: SvgPicture.asset(
                             'assets/svg/pen.svg',
                             package: "settings_kosmos",
