@@ -6,7 +6,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_package.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,6 @@ class ResponsiveSettings extends HookConsumerWidget {
 
   final SettingsThemeData? theme;
   final String? themeName;
-  final String? userId;
 
   final bool showUserProfil;
   final bool showUserImage;
@@ -270,10 +268,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
                                       onPressed: () async {
-                                        File? _image = await FirebaseStorageController()
+                                        File? image = await FirebaseStorageController()
                                             .selectFile(FirebaseAuth.instance.currentUser!.uid);
-                                        if (_image != null) {
-                                          profilPicture = _image;
+                                        if (image != null) {
+                                          profilPicture = image;
                                         }
                                         Navigator.of(_).pop(true);
                                       },

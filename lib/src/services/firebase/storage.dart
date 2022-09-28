@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import "package:image_picker/image_picker.dart";
 
 // import 'package:mime_type/mime_type.dart';
-import 'package:path/path.dart';
 
 class FirebaseStorageController {
   final FirebaseStorage instance = FirebaseStorage.instance;
