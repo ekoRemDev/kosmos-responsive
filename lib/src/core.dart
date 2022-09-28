@@ -189,15 +189,14 @@ class ResponsiveSettings extends HookConsumerWidget {
                 if (showUserImage) ...[
                   Stack(
                     children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        width: formatWidth(102),
-                        height: formatWidth(102),
-                        child: CircleAvatar(
-                          child: userImage != null
-                            ? CachedNetworkImage(
+                      userImage != null
+                          ? Container(
+                            width: formatWidth(102),
+                            height: formatHeight(102),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CachedNetworkImage(
                               imageUrl: userImage!,
                               placeholder: (_, __) => Image.asset(
                                 "assets/images/img_default_user.png",
@@ -210,14 +209,15 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 fit: BoxFit.cover,
                               ),
                               fit: BoxFit.cover,
-                            )
-                            : Image.asset(
+                            ),
+                          )
+                          : CircleAvatar(
+                            child: Image.asset(
                               "assets/images/img_default_user.png",
                               package: "settings_kosmos",
                               fit: BoxFit.cover,
                             ),
-                        )
-                      ),
+                          ),
                       Positioned(
                         right: 0,
                         left: 0,
