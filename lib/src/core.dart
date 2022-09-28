@@ -17,6 +17,7 @@ import 'package:settings_kosmos/src/widget/alert.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../src/services/firebase/storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../settings_kosmos.dart';
 
@@ -46,7 +47,6 @@ class ResponsiveSettings extends HookConsumerWidget {
     Key? key,
     required this.nodes,
     this.profilPicture,
-    this.userId,
     this.theme,
     this.themeName,
     this.deleteAccountFunction,
@@ -196,7 +196,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                         height: formatWidth(102),
                         padding: EdgeInsets.all(formatHeight(10)),
                         clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, borderRadius: BorderRadius.all(Radius.circular(50))),
                         child: userImage != null
                             ? CachedNetworkImage(
                                 imageUrl: userImage!,
@@ -269,7 +270,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
                                       onPressed: () async {
-                                        File? _image = await FirebaseStorageController().selectFile(userId!);
+                                        File? _image = await FirebaseStorageController()
+                                            .selectFile(FirebaseAuth.instance.currentUser!.uid);
                                         if (_image != null) {
                                           profilPicture = _image;
                                         }
