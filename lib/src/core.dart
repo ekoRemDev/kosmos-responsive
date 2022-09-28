@@ -187,145 +187,147 @@ class ResponsiveSettings extends HookConsumerWidget {
                 ),
                 sh(25),
                 if (showUserImage) ...[
-                  Stack(
-                    children: [
-                      userImage != null
-                          ? Container(
-                            width: formatWidth(102),
-                            height: formatHeight(102),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: userImage!,
-                              placeholder: (_, __) => Image.asset(
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        userImage != null
+                            ? SizedBox(
+                              width: formatWidth(102),
+                              height: formatHeight(102),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(1200),
+                                child: CachedNetworkImage(
+                                  imageUrl: userImage!,
+                                  placeholder: (_, __) => Image.asset(
+                                    "assets/images/img_default_user.png",
+                                    package: "settings_kosmos",
+                                    fit: BoxFit.cover,
+                                  ),
+                                  errorWidget: (_, __, ___) => Image.asset(
+                                    "assets/images/img_default_user.png",
+                                    package: "settings_kosmos",
+                                    fit: BoxFit.cover,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                            : CircleAvatar(
+                              child: Image.asset(
                                 "assets/images/img_default_user.png",
                                 package: "settings_kosmos",
                                 fit: BoxFit.cover,
                               ),
-                              errorWidget: (_, __, ___) => Image.asset(
-                                "assets/images/img_default_user.png",
-                                package: "settings_kosmos",
-                                fit: BoxFit.cover,
-                              ),
-                              fit: BoxFit.cover,
                             ),
-                          )
-                          : CircleAvatar(
-                            child: Image.asset(
-                              "assets/images/img_default_user.png",
-                              package: "settings_kosmos",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                      Positioned(
-                        right: 0,
-                        left: 0,
-                        bottom: -10,
-                        child: InkWell(
-                          onTap: () async {
-                            await showCupertinoModalPopup(
-                              context: context,
-                              builder: (_) {
-                                return CupertinoActionSheet(
-                                  cancelButton: CupertinoActionSheetAction(
-                                    onPressed: () {
-                                      Navigator.of(_).pop(false);
-                                    },
-                                    child: Text(
-                                      "utils.cancel".tr(),
+                        Positioned(
+                          right: 0,
+                          left: 0,
+                          bottom: 0,
+                          child: InkWell(
+                            onTap: () async {
+                              await showCupertinoModalPopup(
+                                context: context,
+                                builder: (_) {
+                                  return CupertinoActionSheet(
+                                    cancelButton: CupertinoActionSheetAction(
+                                      onPressed: () {
+                                        Navigator.of(_).pop(false);
+                                      },
+                                      child: Text(
+                                        "utils.cancel".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      "settings.what-you-want-do".tr(),
                                       style: TextStyle(
-                                        color: const Color(0xFF007AFF),
-                                        fontSize: sp(20),
+                                        fontSize: sp(13),
+                                        color: const Color(0xFF8F8F8F),
                                         fontWeight: FontWeight.w600,
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                  ),
-                                  title: Text(
-                                    "settings.what-you-want-do".tr(),
-                                    style: TextStyle(
-                                      fontSize: sp(13),
-                                      color: const Color(0xFF8F8F8F),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  actions: [
-                                    CupertinoActionSheetAction(
-                                      isDestructiveAction: true,
-                                      onPressed: () {
-                                        //AutoRouter.of(context).replaceNamed("/logout");
-                                      },
-                                      //Prendre une photo/video
-                                      child: Text(
-                                        "settings.take-picture".tr(),
-                                        style: TextStyle(
-                                          color: const Color(0xFF007AFF),
-                                          fontSize: sp(20),
+                                    actions: [
+                                      CupertinoActionSheetAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () {
+                                          //AutoRouter.of(context).replaceNamed("/logout");
+                                        },
+                                        //Prendre une photo/video
+                                        child: Text(
+                                          "settings.take-picture".tr(),
+                                          style: TextStyle(
+                                            color: const Color(0xFF007AFF),
+                                            fontSize: sp(20),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    //Bibliothèque
-                                    CupertinoActionSheetAction(
-                                      isDestructiveAction: true,
-                                      onPressed: () async {
-                                        File? image = await FirebaseStorageController()
-                                            .selectFile(FirebaseAuth.instance.currentUser!.uid);
-                                        if (image != null) {
-                                          profilPicture = image;
-                                        }
-                                        Navigator.of(_).pop(true);
-                                      },
-                                      child: Text(
-                                        "settings.modify-picture".tr(),
-                                        style: TextStyle(
-                                          color: const Color(0xFF007AFF),
-                                          fontSize: sp(20),
+                                      //Bibliothèque
+                                      CupertinoActionSheetAction(
+                                        isDestructiveAction: true,
+                                        onPressed: () async {
+                                          File? image = await FirebaseStorageController()
+                                              .selectFile(FirebaseAuth.instance.currentUser!.uid);
+                                          if (image != null) {
+                                            profilPicture = image;
+                                          }
+                                          Navigator.of(_).pop(true);
+                                        },
+                                        child: Text(
+                                          "settings.modify-picture".tr(),
+                                          style: TextStyle(
+                                            color: const Color(0xFF007AFF),
+                                            fontSize: sp(20),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                            // if (showBoxAlertToModifyProfilPicture == true) {
-                            //   final rep = await AlertBox.show<bool>(
-                            //     context: context,
-                            //     title: "settings.modify-picture".tr(),
-                            //     message: "settings.modify-picture-confirm".tr(),
-                            //     actions: [
-                            //       (_) => CTA.primary(
-                            //             textButton: "utils.yes".tr(),
-                            //             width: formatWidth(207),
-                            //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
-                            //             onTap: () => Navigator.of(_).pop(true),
-                            //           ),
-                            //       (_) => CTA.secondary(
-                            //             textButton: "utils.non".tr(),
-                            //             width: formatWidth(207),
-                            //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
-                            //             onTap: () => Navigator.of(_).pop(false),
-                            //           ),
-                            //     ],
-                            //   );
-                            //   if (rep == true) {
-                            //     if (deleteAccountFunction != null) await deleteAccountFunction!();
-                            //     AutoRouter.of(context).replaceNamed("/logout");
-                            //   }
-                            // }
-                          },
-                          //storageservice
-                          //getdowlondurl
-                          //updatefirebaseuser
+                                    ],
+                                  );
+                                },
+                              );
+                              // if (showBoxAlertToModifyProfilPicture == true) {
+                              //   final rep = await AlertBox.show<bool>(
+                              //     context: context,
+                              //     title: "settings.modify-picture".tr(),
+                              //     message: "settings.modify-picture-confirm".tr(),
+                              //     actions: [
+                              //       (_) => CTA.primary(
+                              //             textButton: "utils.yes".tr(),
+                              //             width: formatWidth(207),
+                              //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
+                              //             onTap: () => Navigator.of(_).pop(true),
+                              //           ),
+                              //       (_) => CTA.secondary(
+                              //             textButton: "utils.non".tr(),
+                              //             width: formatWidth(207),
+                              //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                              //             onTap: () => Navigator.of(_).pop(false),
+                              //           ),
+                              //     ],
+                              //   );
+                              //   if (rep == true) {
+                              //     if (deleteAccountFunction != null) await deleteAccountFunction!();
+                              //     AutoRouter.of(context).replaceNamed("/logout");
+                              //   }
+                              // }
+                            },
+                            //storageservice
+                            //getdowlondurl
+                            //updatefirebaseuser
 
-                          child: SvgPicture.asset(
-                            'assets/svg/pen.svg',
-                            package: "settings_kosmos",
-                            height: 30,
+                            child: SvgPicture.asset(
+                              'assets/svg/pen.svg',
+                              package: "settings_kosmos",
+                              height: 30,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                   sh(5.4),
                 ],
