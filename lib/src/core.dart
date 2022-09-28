@@ -189,13 +189,9 @@ class ResponsiveSettings extends HookConsumerWidget {
                 if (showUserImage) ...[
                   Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         width: formatWidth(102),
                         height: formatWidth(102),
-                        padding: EdgeInsets.all(formatHeight(10)),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, borderRadius: BorderRadius.all(Radius.circular(50))),
                         child: userImage != null
                             ? CachedNetworkImage(
                                 imageUrl: userImage!,
