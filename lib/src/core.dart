@@ -191,7 +191,11 @@ class ResponsiveSettings extends HookConsumerWidget {
                     clipBehavior: Clip.none,
                     children: [
                       userImage != null
-                      ? CircleAvatar(
+                      ? Container(
+                         width: formatWidth(92),
+                    height: formatWidth(92),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    clipBehavior: Clip.hardEdge,
                         child: CachedNetworkImage(
                           imageUrl: userImage!,
                           placeholder: (_, __) => Image.asset(
