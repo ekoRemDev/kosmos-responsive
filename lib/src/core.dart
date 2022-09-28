@@ -189,34 +189,39 @@ class ResponsiveSettings extends HookConsumerWidget {
                 if (showUserImage) ...[
                   Stack(
                     children: [
-                      SizedBox(
+                      Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
                         width: formatWidth(102),
                         height: formatWidth(102),
-                        child: userImage != null
+                        child: CircleAvatar(
+                          child: userImage != null
                             ? CachedNetworkImage(
-                                imageUrl: userImage!,
-                                placeholder: (_, __) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                errorWidget: (_, __, ___) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
+                              imageUrl: userImage!,
+                              placeholder: (_, __) => Image.asset(
                                 "assets/images/img_default_user.png",
                                 package: "settings_kosmos",
                                 fit: BoxFit.cover,
                               ),
+                              errorWidget: (_, __, ___) => Image.asset(
+                                "assets/images/img_default_user.png",
+                                package: "settings_kosmos",
+                                fit: BoxFit.cover,
+                              ),
+                              fit: BoxFit.cover,
+                            )
+                            : Image.asset(
+                              "assets/images/img_default_user.png",
+                              package: "settings_kosmos",
+                              fit: BoxFit.cover,
+                            ),
+                        )
                       ),
                       Positioned(
                         right: 0,
                         left: 0,
-                        bottom: 0,
+                        bottom: -10,
                         child: InkWell(
                           onTap: () async {
                             await showCupertinoModalPopup(
