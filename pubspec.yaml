@@ -57,6 +57,9 @@ dependencies:
       publish_to: none
       url: https://gitlab+deploy-token-1156709:fR3FsBtxfwwKuM43HyWp@gitlab.com/package16/package-ui-kosmos.git
       ref: main
+  firebase_storage: ^10.3.9
+  image_picker: ^0.8.5+3
+  firebase_auth: ^3.10.0
 
 dev_dependencies:
   flutter_test:

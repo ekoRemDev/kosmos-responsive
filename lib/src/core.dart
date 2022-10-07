@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_package.dart';
@@ -13,6 +15,8 @@ import 'package:dartz/dartz.dart' as dz;
 import 'package:settings_kosmos/src/widget/alert.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../src/services/firebase/storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../settings_kosmos.dart';
 
@@ -23,6 +27,8 @@ final settingsProvider = ChangeNotifierProvider<SettingsProvider>((ref) {
 class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
   final Function? deleteAccountFunction;
+
+  File? profilPicture;
 
   final SettingsThemeData? theme;
   final String? themeName;
@@ -35,9 +41,10 @@ class ResponsiveSettings extends HookConsumerWidget {
   final String? userEmail;
   final String? userImage;
 
-  const ResponsiveSettings({
+  ResponsiveSettings({
     Key? key,
     required this.nodes,
+    this.profilPicture,
     this.theme,
     this.themeName,
     this.deleteAccountFunction,
@@ -178,37 +185,40 @@ class ResponsiveSettings extends HookConsumerWidget {
                 sh(25),
                 if (showUserImage) ...[
                   Stack(
+                    clipBehavior: Clip.none,
                     children: [
-                      Container(
-                        width: formatWidth(92),
-                        height: formatWidth(92),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: userImage != null
-                            ? CachedNetworkImage(
-                                imageUrl: userImage!,
-                                placeholder: (_, __) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                errorWidget: (_, __, ___) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                "assets/images/img_default_user.png",
-                                package: "settings_kosmos",
-                                fit: BoxFit.cover,
-                              ),
+                      userImage != null
+                      ? Container(
+                         width: formatWidth(92),
+                    height: formatWidth(92),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    clipBehavior: Clip.hardEdge,
+                        child: CachedNetworkImage(
+                          imageUrl: userImage!,
+                          placeholder: (_, __) => Image.asset(
+                            "assets/images/img_default_user.png",
+                            package: "settings_kosmos",
+                            fit: BoxFit.cover,
+                          ),
+                          errorWidget: (_, __, ___) => Image.asset(
+                            "assets/images/img_default_user.png",
+                            package: "settings_kosmos",
+                            fit: BoxFit.cover,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                      : CircleAvatar(
+                        child: Image.asset(
+                          "assets/images/img_default_user.png",
+                          package: "settings_kosmos",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       Positioned(
                         right: 0,
                         left: 0,
-                        bottom: 0,
+                        bottom: -10,
                         child: InkWell(
                           onTap: () async {
                             await showCupertinoModalPopup(
@@ -252,9 +262,15 @@ class ResponsiveSettings extends HookConsumerWidget {
                                         ),
                                       ),
                                     ),
+                                    //Bibliothèque
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        File? image = await FirebaseStorageController()
+                                            .selectFile(FirebaseAuth.instance.currentUser!.uid);
+                                        if (image != null) {
+                                          profilPicture = image;
+                                        }
                                         Navigator.of(_).pop(true);
                                       },
                                       child: Text(
@@ -295,6 +311,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                             //   }
                             // }
                           },
+                          //storageservice
+                          //getdowlondurl
+                          //updatefirebaseuser
+
                           child: SvgPicture.asset(
                             'assets/svg/pen.svg',
                             package: "settings_kosmos",
