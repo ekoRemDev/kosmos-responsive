@@ -70,10 +70,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Opacity(
-                      opacity: AutoRouter.of(context).canNavigateBack &&
-                              getResponsiveValue(context, defaultValue: false, tablet: false, phone: true)
-                          ? 1
-                          : 0,
+                      opacity: AutoRouter.of(context).canNavigateBack && getResponsiveValue(context, defaultValue: false, tablet: false, phone: true) ? 1 : 0,
                       child: InkWell(
                         onTap: () {
                           if (AutoRouter.of(context).canNavigateBack) AutoRouter.of(context).navigateBack();
@@ -350,14 +347,11 @@ class ResponsiveSettings extends HookConsumerWidget {
               text: TextSpan(children: [
                 TextSpan(
                   text: "settings.edited_by".tr(),
-                  style: themeData?.titleStyle ??
-                      TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500),
+                  style: themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500),
                 ),
                 TextSpan(
                   text: "kosmos-digital.com",
-                  style: (themeData?.titleStyle ??
-                          TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500))
-                      .copyWith(decoration: TextDecoration.underline),
+                  style: (themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500)).copyWith(decoration: TextDecoration.underline),
                   recognizer: TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse("https://kosmos-digital.com")),
                 ),
               ]),
@@ -368,16 +362,14 @@ class ResponsiveSettings extends HookConsumerWidget {
     );
   }
 
-  _buildSettingsSection(
-      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
+  _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           node.value1.tr(),
-          style:
-              themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+          style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
         ),
         sh(10),
         ...node.value2
@@ -402,9 +394,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-              ? ref.watch(settingsProvider).isActive(e.tag)
-              : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
@@ -432,9 +422,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       }
     case SettingsType.security:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-            ? ref.watch(settingsProvider).isActive(e.tag)
-            : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -475,9 +463,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.payment:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-            ? ref.watch(settingsProvider).isActive(e.tag)
-            : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -518,9 +504,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.share:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-            ? ref.watch(settingsProvider).isActive(e.tag)
-            : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -561,9 +545,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.help:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-            ? ref.watch(settingsProvider).isActive(e.tag)
-            : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -604,9 +586,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.link:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-            ? ref.watch(settingsProvider).isActive(e.tag)
-            : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -634,9 +614,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-              ? ref.watch(settingsProvider).isActive(e.tag)
-              : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
@@ -659,7 +637,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
           subtitle: e.data!.subTitle,
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
-          activeIcon: e.data!.prefix,
+          activeIcon: e.data!.activePrefix,
         );
       }
     case SettingsType.facebook:
@@ -753,9 +731,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               }
             },
           ),
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)
-              ? ref.watch(settingsProvider).isActive(e.tag)
-              : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onSwicth != null) {
               await e.data!.onSwicth!(context, ref, !e.data!.switchValue!(ref));
@@ -817,8 +793,7 @@ class NodePage extends ConsumerWidget {
     );
   }
 
-  _buildSettingsSection(
-      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
+  _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -830,8 +805,7 @@ class NodePage extends ConsumerWidget {
               Center(
                 child: Text(
                   node.value1.tr(),
-                  style: themeData?.sectionStyle ??
-                      TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+                  style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ),
               if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true))
