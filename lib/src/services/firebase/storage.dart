@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import "package:image_picker/image_picker.dart";
@@ -30,12 +31,11 @@ class FirebaseStorageController {
     try {
       await ref.putFile(profilPicture);
       final url = await ref.getDownloadURL();
-      return url.toString();
+      FirebaseFirestore.instance.collection('users').doc(userId).update({'profilImage': url.toString()});
     } catch (error) {
       if (kDebugMode) {
         print(error);
       }
-      return null;
     }
   }
 
