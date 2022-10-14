@@ -164,8 +164,9 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   ),
                               (_) => CTA.secondary(
                                     textButton: "utils.non".tr(),
+                                    border: Border.all(color: Colors.transparent),
                                     width: formatWidth(207),
-                                    textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                                    textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
                                     onTap: () => Navigator.of(_).pop(false),
                                   ),
                             ],
