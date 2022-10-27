@@ -186,10 +186,18 @@ class ResponsiveSettings extends HookConsumerWidget {
                           }
                         }
                       },
-                      child: Icon(
-                        Icons.more_horiz,
-                        color: Colors.black,
-                        size: formatWidth(20),
+                      child: 
+                      
+                     SizedBox(
+                          width: formatWidth(50),
+                          height: formatHeight(50),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                        child: Icon(
+                          Icons.more_horiz,
+                          color: Colors.black,
+                          size: formatWidth(20),
+                        )),
                       ),
                     )
                   ],
