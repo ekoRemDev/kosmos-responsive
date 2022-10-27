@@ -84,10 +84,13 @@ class ResponsiveSettings extends HookConsumerWidget {
                         onTap: () {
                           if (AutoRouter.of(context).canNavigateBack) AutoRouter.of(context).navigateBack();
                         },
-                        child: Icon(
-                          Icons.arrow_back_rounded,
-                          color: Colors.black,
-                          size: formatWidth(20),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.arrow_back_rounded,
+                            color: Colors.black,
+                            size: formatWidth(20),
+                          ),
                         ),
                       ),
                     ),
