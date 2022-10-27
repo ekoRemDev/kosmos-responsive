@@ -27,7 +27,7 @@ final settingsProvider = ChangeNotifierProvider<SettingsProvider>((ref) {
 class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
   final Function? deleteAccountFunction;
-  final Function? logoutFunction;
+  final Function(BuildContext)? logoutFunction;
 
   File? profilPicture;
 
@@ -132,7 +132,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 CupertinoActionSheetAction(
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    logoutFunction?.call() ?? AutoRouter.of(context).replaceNamed("/logout");
+                                    logoutFunction?.call(context) ?? AutoRouter.of(context).replaceNamed("/logout");
                                   },
                                   child: Text(
                                     "settings.logout".tr(),
@@ -145,7 +145,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 CupertinoActionSheetAction(
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    Navigator.of(_).pop(true);
+                                    deleteAccountFunction?.call() ?? Navigator.of(_).pop(true);
                                   },
                                   child: Text(
                                     "settings.delete-profil".tr(),
