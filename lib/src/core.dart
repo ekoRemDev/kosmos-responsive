@@ -62,7 +62,7 @@ class ResponsiveSettings extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SettingsThemeData? themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
-    if (getResponsiveValue(context, defaultValue: false, tablet: true, phone: true)) {
+    if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true)) {
       execAfterBuild(() => ref.read(settingsProvider).clear());
     }
 
@@ -84,12 +84,16 @@ class ResponsiveSettings extends HookConsumerWidget {
                         onTap: () {
                           if (AutoRouter.of(context).canNavigateBack) AutoRouter.of(context).navigateBack();
                         },
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.arrow_back_rounded,
-                            color: Colors.black,
-                            size: formatWidth(20),
+                        child: SizedBox(
+                          width: formatWidth(50),
+                          height: formatHeight(50),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(
+                              Icons.arrow_back_rounded,
+                              color: Colors.black,
+                              size: formatWidth(20),
+                            ),
                           ),
                         ),
                       ),
@@ -167,8 +171,9 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   ),
                               (_) => CTA.secondary(
                                     textButton: "utils.non".tr(),
+                                    border: Border.all(color: Colors.transparent),
                                     width: formatWidth(207),
-                                    textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                                    textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
                                     onTap: () => Navigator.of(_).pop(false),
                                   ),
                             ],
@@ -419,18 +424,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
-              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
                 AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
-              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
                 AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -447,18 +452,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       }
     case SettingsType.security:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -488,18 +493,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.payment:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -529,18 +534,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.share:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -570,18 +575,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.help:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -611,18 +616,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.link:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
               AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -639,18 +644,18 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         return e.data!.builder!(context, ref);
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
-              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
                 AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
-              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: true)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
                 AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
@@ -756,7 +761,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               }
             },
           ),
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: true) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
           onClick: () async {
             if (e.data?.onSwicth != null) {
               await e.data!.onSwicth!(context, ref, !e.data!.switchValue!(ref));
