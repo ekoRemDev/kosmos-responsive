@@ -59,7 +59,7 @@ class SettingsData {
   final bool Function(WidgetRef)? switchValue;
   final Function(BuildContext, WidgetRef)? onTap;
   final Function(BuildContext, WidgetRef, bool)? onSwicth;
-  final Widget Function(BuildContext, WidgetRef)? builder;
+  final Widget Function(BuildContext, WidgetRef, Function)? builder;
   final Widget Function(BuildContext, WidgetRef)? childBuilder;
   final Color? activeSwitchColor;
 

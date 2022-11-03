@@ -132,6 +132,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 CupertinoActionSheetAction(
                                   isDestructiveAction: true,
                                   onPressed: () {
+                                    Navigator.pop(context);
                                     logoutFunction?.call(context) ?? AutoRouter.of(context).replaceNamed("/logout");
                                   },
                                   child: Text(
@@ -423,7 +424,23 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
   switch (e.type) {
     case SettingsType.personnalData:
       if (e.data!.builder != null) {
-        return e.data!.builder!(context, ref);
+        return e.data!.builder!(context, ref, () async {
+          if (e.data?.onTap != null) {
+            await e.data!.onTap!(context, ref);
+          } else if (e.children != null) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
+              ref.read(settingsProvider).updateNode(level, e.tag);
+            } else {
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+            }
+          } else if (e.data?.childBuilder != null) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
+              ref.read(settingsProvider).updateNode(level, e.tag);
+            } else {
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+            }
+          }
+        });
       } else {
         return SettingsCellule(
           isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
@@ -643,7 +660,23 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.custom:
       if (e.data?.builder != null) {
-        return e.data!.builder!(context, ref);
+        return e.data!.builder!(context, ref, () async {
+          if (e.data?.onTap != null) {
+            await e.data!.onTap!(context, ref);
+          } else if (e.children != null) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
+              ref.read(settingsProvider).updateNode(level, e.tag);
+            } else {
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+            }
+          } else if (e.data?.childBuilder != null) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
+              ref.read(settingsProvider).updateNode(level, e.tag);
+            } else {
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+            }
+          }
+        });
       } else {
         return SettingsCellule(
           isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
@@ -751,7 +784,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.switcher:
       if (e.data?.builder != null) {
-        return e.data!.builder!(context, ref);
+        return e.data!.builder!(context, ref, () {});
       } else {
         return SettingsCellule(
           switchNotif: CupertinoSwitch(
