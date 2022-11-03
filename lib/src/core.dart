@@ -100,8 +100,12 @@ class ResponsiveSettings extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () async {
+
+                    
+                   
+                      
+                     IconButton(
+                      onPressed: ()async{
                         final showBoxAlertToDeleteAccount = await showCupertinoModalPopup(
                           context: context,
                           builder: (_) {
@@ -187,11 +191,19 @@ class ResponsiveSettings extends HookConsumerWidget {
                           }
                         }
                       },
-                      child: Icon(
-                        Icons.more_horiz,
-                        color: Colors.black,
-                        size: formatWidth(20),
-                      ),
+
+                       icon: SizedBox(
+                            width: formatWidth(50),
+                            height: formatHeight(50),
+                            child: Align(
+                              alignment: Alignment.center,
+                          child: Icon(
+                            Icons.more_horiz,
+                            color: Colors.black,
+                            size: formatWidth(20),
+                          )),
+                        ),
+                    
                     )
                   ],
                 ),
