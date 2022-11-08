@@ -100,12 +100,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                         ),
                       ),
                     ),
-
-                    
-                   
-                      
-                     IconButton(
-                      onPressed: ()async{
+                    IconButton(
+                      onPressed: () async {
                         final showBoxAlertToDeleteAccount = await showCupertinoModalPopup(
                           context: context,
                           builder: (_) {
@@ -191,19 +187,17 @@ class ResponsiveSettings extends HookConsumerWidget {
                           }
                         }
                       },
-
-                       icon: SizedBox(
-                            width: formatWidth(50),
-                            height: formatHeight(50),
-                            child: Align(
-                              alignment: Alignment.center,
-                          child: Icon(
-                            Icons.more_horiz,
-                            color: themeData?.actionIconColor ?? Colors.black,
-                            size: formatWidth(20),
-                          )),
-                        ),
-                    
+                      icon: SizedBox(
+                        width: formatWidth(50),
+                        height: formatHeight(50),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.more_horiz,
+                              color: themeData?.actionIconColor ?? Colors.black,
+                              size: formatWidth(20),
+                            )),
+                      ),
                     )
                   ],
                 ),
@@ -396,7 +390,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                 ),
                 TextSpan(
                   text: "kosmos-digital.com",
-                  style: (themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500)).copyWith(decoration: TextDecoration.underline),
+                  style: (themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500))
+                      .copyWith(decoration: TextDecoration.underline),
                   recognizer: TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse("https://kosmos-digital.com")),
                 ),
               ]),
@@ -894,7 +889,7 @@ class NodePage extends ConsumerWidget {
                     onTap: () => AutoRouter.of(context).navigateBack(),
                     child: Icon(
                       Icons.arrow_back_ios_new_rounded,
-                      color: Colors.black,
+                      color: themeData?.activeIconColor ?? Colors.black,
                       size: formatWidth(18),
                     ),
                   ),
