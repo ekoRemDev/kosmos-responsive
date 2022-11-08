@@ -9,7 +9,9 @@ class SettingsThemeData {
   final TextStyle? subTitleStyle;
   final double? iconSize;
   final Color? iconColor;
+  final Color? actionIconColor;
   final Color? activeIconColor;
+
 
   ///Only for Web
   final Color? iconActiveColor;
@@ -24,6 +26,7 @@ class SettingsThemeData {
     this.iconSize,
     this.iconColor,
     this.activeIconColor,
+    this.actionIconColor,
 
     ///Web
     this.buttonBackgroundActiveColor,

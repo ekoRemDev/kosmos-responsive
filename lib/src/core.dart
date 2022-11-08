@@ -93,7 +93,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             alignment: Alignment.centerLeft,
                             child: Icon(
                               Icons.arrow_back_rounded,
-                              color: Colors.black,
+                              color: themeData?.actionIconColor ?? Colors.black,
                               size: formatWidth(20),
                             ),
                           ),
@@ -199,7 +199,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                               alignment: Alignment.center,
                           child: Icon(
                             Icons.more_horiz,
-                            color: Colors.black,
+                            color: themeData?.actionIconColor ?? Colors.black,
                             size: formatWidth(20),
                           )),
                         ),
