@@ -211,7 +211,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                               width: formatWidth(92),
                               height: formatWidth(92),
                               decoration: const BoxDecoration(shape: BoxShape.circle),
-                              clipBehavior: Clip.hardEdge,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
                               child: CachedNetworkImage(
                                 imageUrl: userImage!,
                                 placeholder: (_, __) => Image.asset(
@@ -227,7 +227,11 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : CircleAvatar(
+                          : Container(
+                              width: formatWidth(92),
+                              height: formatWidth(92),
+                              decoration: const BoxDecoration(shape: BoxShape.circle),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
                               child: Image.asset(
                                 "assets/images/img_default_user.png",
                                 package: "settings_kosmos",
