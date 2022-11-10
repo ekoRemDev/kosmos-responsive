@@ -666,7 +666,7 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         },
         icon: e.data?.prefix,
         activeIcon: e.data?.prefix,
-        title: e.data?.title,
+        title: e.data?.title?.tr(),
         titleStyle: themeData?.titleStyle,
       );
     case SettingsType.custom:
@@ -708,9 +708,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               }
             }
           },
-          title: e.data!.title,
+          title: e.data!.title?.tr(),
           titleStyle: themeData?.titleStyle,
-          subtitle: e.data!.subTitle,
+          subtitle: e.data!.subTitle?.tr(),
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
           activeIcon: e.data!.activePrefix,
