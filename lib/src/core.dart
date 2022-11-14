@@ -28,6 +28,8 @@ class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
   final Function? deleteAccountFunction;
   final Function(BuildContext)? logoutFunction;
+  final Function(BuildContext)? onChangedProfilPictureFunction;
+
 
   File? profilPicture;
 
@@ -58,6 +60,7 @@ class ResponsiveSettings extends HookConsumerWidget {
     this.userEmail,
     this.userImage,
     this.userName,
+    this.onChangedProfilPictureFunction,
   }) : super(key: key);
 
   @override
@@ -245,6 +248,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                           bottom: -10,
                           child: InkWell(
                             onTap: () async {
+                              if (onChangedProfilPictureFunction != null) {
+                                onChangedProfilPictureFunction!.call(context);
+                                return;
+                              }
                               await showCupertinoModalPopup(
                                 context: context,
                                 builder: (_) {
