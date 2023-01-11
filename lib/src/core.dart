@@ -30,7 +30,7 @@ class ResponsiveSettings extends HookConsumerWidget {
   final Function? deleteAccountFunction;
   final Function(BuildContext)? logoutFunction;
   final Function(BuildContext)? onChangedProfilPictureFunction;
-  final Function(BuildContext, WidgetRef)? subProfilBuilder;
+  final Widget Function(BuildContext, WidgetRef)? subProfilBuilder;
 
   File? profilPicture;
 
