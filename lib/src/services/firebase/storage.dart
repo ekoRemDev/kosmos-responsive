@@ -32,11 +32,13 @@ class FirebaseStorageController {
       await ref.putFile(profilPicture);
       final url = await ref.getDownloadURL();
       FirebaseFirestore.instance.collection('users').doc(userId).update({'profilImage': url.toString()});
+      return url;
     } catch (error) {
       if (kDebugMode) {
         print(error);
       }
     }
+    return null;
   }
 
   // Future<String> loadImage(String path) async {

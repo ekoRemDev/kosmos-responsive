@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core_kosmos/core_package.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:dartz/dartz.dart' as dz;
+import 'package:image_picker/image_picker.dart';
 import 'package:settings_kosmos/src/widget/alert.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,7 +31,6 @@ class ResponsiveSettings extends HookConsumerWidget {
   final Function? deleteAccountFunction;
   final Function(BuildContext)? logoutFunction;
   final Function(BuildContext)? onChangedProfilPictureFunction;
-
 
   File? profilPicture;
 
@@ -281,10 +282,15 @@ class ResponsiveSettings extends HookConsumerWidget {
                                     actions: [
                                       CupertinoActionSheetAction(
                                         isDestructiveAction: true,
-                                        onPressed: () {
-                                          //AutoRouter.of(context).replaceNamed("/logout");
+                                        onPressed: () async {
+                                          final file = await ImagePicker().pickImage(source: ImageSource.camera);
+                                          if (file != null) {
+                                            profilPicture = File(file.path);
+
+                                            /// Upload files to firebase storage
+                                            final _ = await FirebaseStorageController().downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
+                                          }
                                         },
-                                        //Prendre une photo/video
                                         child: Text(
                                           "settings.take-picture".tr(),
                                           style: TextStyle(
