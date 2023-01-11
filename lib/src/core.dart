@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core_kosmos/core_package.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,6 +30,7 @@ class ResponsiveSettings extends HookConsumerWidget {
   final Function? deleteAccountFunction;
   final Function(BuildContext)? logoutFunction;
   final Function(BuildContext)? onChangedProfilPictureFunction;
+  final Function(BuildContext, WidgetRef)? subProfilBuilder;
 
   File? profilPicture;
 
@@ -59,6 +59,7 @@ class ResponsiveSettings extends HookConsumerWidget {
     this.showEditedBy = true,
     this.showEditImageProfil = true,
     this.userEmail,
+    this.subProfilBuilder,
     this.userImage,
     this.userName,
     this.onChangedProfilPictureFunction,
@@ -347,10 +348,6 @@ class ResponsiveSettings extends HookConsumerWidget {
                               //   }
                               // }
                             },
-                            //storageservice
-                            //getdowlondurl
-                            //updatefirebaseuser
-
                             child: SvgPicture.asset(
                               'assets/svg/pen.svg',
                               package: "settings_kosmos",
@@ -385,6 +382,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                         ),
                     textAlign: TextAlign.center,
                   ),
+                ],
+                if (subProfilBuilder != null) ...[
+                  sh(6.6),
+                  subProfilBuilder!(context, ref),
                 ],
               ],
             ),
