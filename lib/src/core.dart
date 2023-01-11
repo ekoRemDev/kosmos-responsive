@@ -289,7 +289,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                                             profilPicture = File(file.path);
 
                                             /// Upload files to firebase storage
-                                            final _ = await FirebaseStorageController().downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
+                                            final __ = await FirebaseStorageController().downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
+                                            Navigator.of(_).pop(true);
                                           }
                                         },
                                         child: Text(
