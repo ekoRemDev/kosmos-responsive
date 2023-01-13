@@ -7,6 +7,7 @@ abstract class AlertBox {
   static FutureOr<T?> show<T>({
     required BuildContext context,
     required String title,
+    TextStyle? titleStyle,
     required String message,
     List<Widget Function(BuildContext)>? actions,
     bool isClosable = true,
@@ -45,7 +46,7 @@ abstract class AlertBox {
                         width: formatWidth(200),
                         child: Text(
                           title,
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: sp(20)),
+                          style: titleStyle?? TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: sp(20)),
                           textAlign: TextAlign.center,
                         ),
                       ),

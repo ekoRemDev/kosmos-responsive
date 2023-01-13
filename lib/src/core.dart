@@ -169,6 +169,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                           final rep = await AlertBox.show<bool>(
                             context: context,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                            titleStyle: themeData?.sectionStyle?.copyWith(fontSize: sp(22), fontWeight: FontWeight.w600),
                             title: "settings.delete-account".tr(),
                             message: "settings.delete-account-confirm".tr(),
                             actions: [
