@@ -10,6 +10,7 @@ abstract class AlertBox {
     required String message,
     List<Widget Function(BuildContext)>? actions,
     bool isClosable = true,
+    Color? backgroundColor,
   }) async {
     return await showGeneralDialog<T>(
       context: context,
@@ -23,7 +24,7 @@ abstract class AlertBox {
                   width: formatWidth(282),
                   padding: EdgeInsets.symmetric(vertical: formatHeight(28), horizontal: formatWidth(34)),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: backgroundColor ?? Colors.white,
                     borderRadius: BorderRadius.circular(28),
                   ),
                   child: Column(
