@@ -27,8 +27,8 @@ final settingsProvider = ChangeNotifierProvider<SettingsProvider>((ref) {
 
 class ResponsiveSettings extends HookConsumerWidget {
   final List<dz.Tuple2<String, List<SettingsNode>>> nodes;
-  final Function? deleteAccountFunction;
-  final Function(BuildContext)? logoutFunction;
+  final Function(BuildContext, WidgetRef)? deleteAccountFunction;
+  final Function(BuildContext, WidgetRef)? logoutFunction;
   final Function(BuildContext)? onChangedProfilPictureFunction;
   final Widget Function(BuildContext, WidgetRef)? subProfilBuilder;
 
@@ -138,7 +138,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   isDestructiveAction: true,
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    logoutFunction?.call(context) ?? AutoRouter.of(context).replaceNamed("/logout");
+                                    logoutFunction?.call(context, ref) ?? AutoRouter.of(context).replaceNamed("/logout");
                                   },
                                   child: Text(
                                     "settings.logout".tr(),
@@ -151,7 +151,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 CupertinoActionSheetAction(
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    deleteAccountFunction?.call() ?? Navigator.of(_).pop(true);
+                                    Navigator.of(_).pop(true);
                                   },
                                   child: Text(
                                     "settings.delete-profil".tr(),
@@ -187,7 +187,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             ],
                           );
                           if (rep == true) {
-                            if (deleteAccountFunction != null) await deleteAccountFunction!();
+                            if (deleteAccountFunction != null) return await deleteAccountFunction!(context, ref);
                             AutoRouter.of(context).replaceNamed("/logout");
                           }
                         }
