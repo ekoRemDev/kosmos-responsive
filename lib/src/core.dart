@@ -480,12 +480,12 @@ class ResponsiveSettings extends HookConsumerWidget {
                   fontWeight: FontWeight.w600,
                   color: Colors.black),
         ),
-        sh(7),
+        sh(3),
         ...node.value2
             .map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    sh(3),
+                    sh(7),
                     buildSettingsItem(context, e, themeData, ref),
                   ],
                 ))
