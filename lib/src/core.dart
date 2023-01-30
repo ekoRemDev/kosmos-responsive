@@ -147,7 +147,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                 CupertinoActionSheetAction(
                                   isDestructiveAction: true,
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    Navigator.of(_).pop();
                                     logoutFunction?.call(context, ref) ??
                                         AutoRouter.of(context)
                                             .replaceNamed("/logout");
