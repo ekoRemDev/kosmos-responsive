@@ -1040,13 +1040,13 @@ class NodePage extends ConsumerWidget {
             ],
           ),
         ),
-        sh(10),
+        sh(3),
         ...node.value2
             .map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildSettingsItem(context, e, themeData, ref, level),
                     sh(7),
+                    buildSettingsItem(context, e, themeData, ref, level),
                   ],
                 ))
             .toList(),
