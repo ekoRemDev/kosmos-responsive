@@ -471,7 +471,7 @@ class ResponsiveSettings extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        sh(23),
+        sh(15),
         Text(
           node.value1.tr(),
           style: themeData?.sectionStyle ??
