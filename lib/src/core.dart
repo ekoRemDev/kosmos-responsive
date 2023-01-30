@@ -480,13 +480,13 @@ class ResponsiveSettings extends HookConsumerWidget {
                   fontWeight: FontWeight.w600,
                   color: Colors.black),
         ),
-        sh(10),
+        sh(7),
         ...node.value2
             .map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    sh(3),
                     buildSettingsItem(context, e, themeData, ref),
-                    sh(7),
                   ],
                 ))
             .toList(),
@@ -1040,7 +1040,7 @@ class NodePage extends ConsumerWidget {
             ],
           ),
         ),
-        sh(3),
+        sh(10),
         ...node.value2
             .map((e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
