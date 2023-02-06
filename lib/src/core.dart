@@ -870,7 +870,14 @@ class NodePage extends ConsumerWidget {
     final SettingsThemeData? themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
     if (node != null && node!.data?.childBuilder != null) {
-      return node!.data!.childBuilder!(context, ref);
+      return Padding(
+        padding: getResponsiveValue(
+          context,
+          defaultValue: EdgeInsets.symmetric(horizontal: formatWidth(22)),
+          phone: EdgeInsets.symmetric(horizontal: formatWidth(29)),
+        ),
+        child: node!.data!.childBuilder!(context, ref),
+      );
     }
 
     return Column(
