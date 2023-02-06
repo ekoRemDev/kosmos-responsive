@@ -889,13 +889,14 @@ class NodePage extends ConsumerWidget {
   }
 
   _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
-    printInDebug(themeData?.activeIconColor);
+    themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
+          width: double.infinity,
           height: formatHeight(50),
           child: Stack(
             children: [
@@ -912,13 +913,15 @@ class NodePage extends ConsumerWidget {
                   left: 0,
                   child: InkWell(
                     onTap: () => AutoRouter.of(context).navigateBack(),
-                    child: SizedBox(
-                      width: formatWidth(50),
-                      height: formatWidth(50),
-                      child: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: themeData?.activeIconColor ?? Colors.black,
-                        size: formatWidth(20),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: formatWidth(27.5)),
+                      height: formatHeight(50),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: themeData?.activeIconColor ?? Colors.black,
+                          size: formatWidth(20),
+                        ),
                       ),
                     ),
                   ),
