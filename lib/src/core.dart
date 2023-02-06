@@ -889,7 +889,7 @@ class NodePage extends ConsumerWidget {
   }
 
   _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
-    themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
+    themeData = loadThemeData(null, themeName ?? "settings", () => const SettingsThemeData());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -931,12 +931,19 @@ class NodePage extends ConsumerWidget {
         ),
         sh(10),
         ...node.value2
-            .map((e) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    sh(7),
-                    buildSettingsItem(context, e, themeData, ref, level),
-                  ],
+            .map((e) => Padding(
+                  padding: getResponsiveValue(
+                    context,
+                    defaultValue: EdgeInsets.symmetric(horizontal: formatWidth(22)),
+                    phone: EdgeInsets.symmetric(horizontal: formatWidth(29)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      sh(7),
+                      buildSettingsItem(context, e, themeData, ref, level),
+                    ],
+                  ),
                 ))
             .toList(),
       ],
