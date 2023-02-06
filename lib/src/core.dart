@@ -896,8 +896,6 @@ class NodePage extends ConsumerWidget {
   }
 
   _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
-    themeData = loadThemeData(null, themeName ?? "settings", () => const SettingsThemeData());
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -926,7 +924,7 @@ class NodePage extends ConsumerWidget {
                       child: Center(
                         child: Icon(
                           Icons.arrow_back_ios_new_rounded,
-                          color: themeData?.activeIconColor ?? Colors.black,
+                          color: themeData?.actionIconColor ?? Colors.black,
                           size: formatWidth(20),
                         ),
                       ),
