@@ -97,7 +97,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Icon(
-                              Icons.arrow_back_rounded,
+                              Icons.arrow_back_ios_new_rounded,
                               color: themeData?.actionIconColor ?? Colors.black,
                               size: formatWidth(20),
                             ),
@@ -828,9 +828,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               await e.data!.onSwicth!(context, ref, !e.data!.switchValue!(ref));
             }
           },
-          title: e.data!.title,
+          title: e.data!.title?.tr(),
           titleStyle: themeData?.titleStyle,
-          subtitle: e.data!.subTitle,
+          subtitle: e.data!.subTitle?.tr(),
           subtitleStyle: themeData?.subTitleStyle,
           icon: e.data!.prefix,
           activeIcon: e.data?.prefix,
