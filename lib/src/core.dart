@@ -97,8 +97,11 @@ class ResponsiveSettings extends HookConsumerWidget {
                           : 0,
                       child: InkWell(
                         onTap: () {
-                          if (AutoRouter.of(context).canNavigateBack)
+                          if (AutoRouter.of(context).canNavigateBack) {
                             AutoRouter.of(context).navigateBack();
+                          } else {
+                            AutoRouter.of(context).navigateNamed("/");
+                          }
                         },
                         child: SizedBox(
                           width: formatWidth(50),
