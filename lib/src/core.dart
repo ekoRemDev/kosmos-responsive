@@ -461,13 +461,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         });
@@ -481,13 +481,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
               if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
               }
             }
           },
@@ -509,13 +509,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -550,13 +550,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -591,13 +591,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -632,13 +632,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -673,13 +673,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -697,13 +697,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
             if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         });
@@ -717,13 +717,13 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
               if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).pushNamed("/dashboard/profile/settings/${e.tag}");
               }
             }
           },
@@ -917,7 +917,7 @@ class NodePage extends ConsumerWidget {
                   bottom: 0,
                   left: 0,
                   child: InkWell(
-                    onTap: () => AutoRouter.of(context).navigateBack(),
+                    onTap: () => AutoRouter.of(context).pop(),
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: formatWidth(27.5)),
                       height: formatHeight(50),
