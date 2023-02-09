@@ -211,156 +211,174 @@ class ResponsiveSettings extends HookConsumerWidget {
                   ],
                 ),
                 sh(25),
-                if (showUserImage) ...[
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      userImage != null
-                          ? Container(
-                              width: formatWidth(92),
-                              height: formatWidth(92),
-                              decoration: const BoxDecoration(shape: BoxShape.circle),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              child: CachedNetworkImage(
-                                imageUrl: userImage!,
-                                placeholder: (_, __) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                errorWidget: (_, __, ___) => Image.asset(
-                                  "assets/images/img_default_user.png",
-                                  package: "settings_kosmos",
-                                  fit: BoxFit.cover,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          : Container(
-                              width: formatWidth(92),
-                              height: formatWidth(92),
-                              decoration: const BoxDecoration(shape: BoxShape.circle),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              child: Image.asset(
-                                "assets/images/img_default_user.png",
-                                package: "settings_kosmos",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                      if (showEditImageProfil)
-                        Positioned(
-                          right: 0,
-                          left: 0,
-                          bottom: -10,
-                          child: InkWell(
-                            onTap: () async {
-                              if (onChangedProfilPictureFunction != null) {
-                                onChangedProfilPictureFunction!.call(context);
-                                return;
-                              }
-                              await showCupertinoModalPopup(
-                                context: context,
-                                builder: (_) {
-                                  return CupertinoActionSheet(
-                                    cancelButton: CupertinoActionSheetAction(
-                                      onPressed: () {
-                                        Navigator.of(_).pop(false);
+                         if (showUserImage) ...[
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    overlayColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.transparent),
+                    onTap: (!showEditImageProfil)
+                        ? null
+                        : () async {
+                            if (onChangedProfilPictureFunction != null) {
+                              onChangedProfilPictureFunction!.call(context);
+                              return;
+                            }
+                            await showCupertinoModalPopup(
+                              context: context,
+                              builder: (_) {
+                                return CupertinoActionSheet(
+                                  cancelButton: CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.of(_).pop(false);
+                                    },
+                                    child: Text(
+                                      "utils.cancel".tr(),
+                                      style: TextStyle(
+                                        color: const Color(0xFF007AFF),
+                                        fontSize: sp(20),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    "settings.what-you-want-do".tr(),
+                                    style: TextStyle(
+                                      fontSize: sp(13),
+                                      color: const Color(0xFF8F8F8F),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: [
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () async {
+                                        final file = await ImagePicker()
+                                            .pickImage(
+                                                source: ImageSource.camera);
+                                        if (file != null) {
+                                          profilPicture = File(file.path);
+
+                                          /// Upload files to firebase storage
+                                          final __ =
+                                              await FirebaseStorageController()
+                                                  .downloadUrl(
+                                                      profilPicture!,
+                                                      FirebaseAuth.instance
+                                                          .currentUser!.uid);
+                                          Navigator.of(_).pop(true);
+                                        }
                                       },
                                       child: Text(
-                                        "utils.cancel".tr(),
+                                        "settings.take-picture".tr(),
                                         style: TextStyle(
                                           color: const Color(0xFF007AFF),
                                           fontSize: sp(20),
-                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ),
-                                    title: Text(
-                                      "settings.what-you-want-do".tr(),
-                                      style: TextStyle(
-                                        fontSize: sp(13),
-                                        color: const Color(0xFF8F8F8F),
-                                        fontWeight: FontWeight.w600,
+                                    //Bibliothèque
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () async {
+                                        File? image =
+                                            await FirebaseStorageController()
+                                                .selectFile(FirebaseAuth
+                                                    .instance.currentUser!.uid);
+                                        if (image != null) {
+                                          profilPicture = image;
+                                        }
+                                        Navigator.of(_).pop(true);
+                                      },
+                                      child: Text(
+                                        "settings.modify-picture".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                        ),
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
-                                    actions: [
-                                      CupertinoActionSheetAction(
-                                        isDestructiveAction: true,
-                                        onPressed: () async {
-                                          final file = await ImagePicker().pickImage(source: ImageSource.camera);
-                                          if (file != null) {
-                                            profilPicture = File(file.path);
-
-                                            /// Upload files to firebase storage
-                                            final __ = await FirebaseStorageController().downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
-                                            Navigator.of(_).pop(true);
-                                          }
-                                        },
-                                        child: Text(
-                                          "settings.take-picture".tr(),
-                                          style: TextStyle(
-                                            color: const Color(0xFF007AFF),
-                                            fontSize: sp(20),
-                                          ),
-                                        ),
-                                      ),
-                                      //Bibliothèque
-                                      CupertinoActionSheetAction(
-                                        isDestructiveAction: true,
-                                        onPressed: () async {
-                                          File? image = await FirebaseStorageController().selectFile(FirebaseAuth.instance.currentUser!.uid);
-                                          if (image != null) {
-                                            profilPicture = image;
-                                          }
-                                          Navigator.of(_).pop(true);
-                                        },
-                                        child: Text(
-                                          "settings.modify-picture".tr(),
-                                          style: TextStyle(
-                                            color: const Color(0xFF007AFF),
-                                            fontSize: sp(20),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              // if (showBoxAlertToModifyProfilPicture == true) {
-                              //   final rep = await AlertBox.show<bool>(
-                              //     context: context,
-                              //     title: "settings.modify-picture".tr(),
-                              //     message: "settings.modify-picture-confirm".tr(),
-                              //     actions: [
-                              //       (_) => CTA.primary(
-                              //             textButton: "utils.yes".tr(),
-                              //             width: formatWidth(207),
-                              //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
-                              //             onTap: () => Navigator.of(_).pop(true),
-                              //           ),
-                              //       (_) => CTA.secondary(
-                              //             textButton: "utils.non".tr(),
-                              //             width: formatWidth(207),
-                              //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
-                              //             onTap: () => Navigator.of(_).pop(false),
-                              //           ),
-                              //     ],
-                              //   );
-                              //   if (rep == true) {
-                              //     if (deleteAccountFunction != null) await deleteAccountFunction!();
-                              //     AutoRouter.of(context).replaceNamed("/logout");
-                              //   }
-                              // }
-                            },
+                                  ],
+                                );
+                              },
+                            );
+                            // if (showBoxAlertToModifyProfilPicture == true) {
+                            //   final rep = await AlertBox.show<bool>(
+                            //     context: context,
+                            //     title: "settings.modify-picture".tr(),
+                            //     message: "settings.modify-picture-confirm".tr(),
+                            //     actions: [
+                            //       (_) => CTA.primary(
+                            //             textButton: "utils.yes".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(true),
+                            //           ),
+                            //       (_) => CTA.secondary(
+                            //             textButton: "utils.non".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(false),
+                            //           ),
+                            //     ],
+                            //   );
+                            //   if (rep == true) {
+                            //     if (deleteAccountFunction != null) await deleteAccountFunction!();
+                            //     AutoRouter.of(context).replaceNamed("/logout");
+                            //   }
+                            // }
+                          },
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        userImage != null
+                            ? Container(
+                                width: formatWidth(92),
+                                height: formatWidth(92),
+                                decoration:
+                                    const BoxDecoration(shape: BoxShape.circle),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: CachedNetworkImage(
+                                  imageUrl: userImage!,
+                                  placeholder: (_, __) => Image.asset(
+                                    "assets/images/img_default_user.png",
+                                    package: "settings_kosmos",
+                                    fit: BoxFit.cover,
+                                  ),
+                                  errorWidget: (_, __, ___) => Image.asset(
+                                    "assets/images/img_default_user.png",
+                                    package: "settings_kosmos",
+                                    fit: BoxFit.cover,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Container(
+                                width: formatWidth(92),
+                                height: formatWidth(92),
+                                decoration:
+                                    const BoxDecoration(shape: BoxShape.circle),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: Image.asset(
+                                  "assets/images/img_default_user.png",
+                                  package: "settings_kosmos",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                        if (showEditImageProfil)
+                          Positioned(
+                            right: 0,
+                            left: 0,
+                            bottom: -10,
                             child: SvgPicture.asset(
                               'assets/svg/pen.svg',
                               package: "settings_kosmos",
                               height: 30,
                             ),
-                          ),
-                        )
-                    ],
+                          )
+                      ],
+                    ),
                   ),
                   sh(5.4),
                 ],
