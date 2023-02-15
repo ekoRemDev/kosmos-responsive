@@ -67,11 +67,9 @@ class ResponsiveSettings extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SettingsThemeData? themeData = loadThemeData(
-        theme, themeName ?? "settings", () => const SettingsThemeData());
+    final SettingsThemeData? themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
-    if (getResponsiveValue(context,
-        defaultValue: false, tablet: false, phone: true)) {
+    if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true)) {
       execAfterBuild(() => ref.read(settingsProvider).clear());
     }
 
@@ -89,16 +87,12 @@ class ResponsiveSettings extends HookConsumerWidget {
                   children: [
                     Opacity(
                       opacity: AutoRouter.of(context).canNavigateBack &&
-                              getResponsiveValue(context,
-                                  defaultValue: false,
-                                  tablet: false,
-                                  phone: true)
+                              getResponsiveValue(context, defaultValue: false, tablet: false, phone: true)
                           ? 1
                           : 0,
                       child: InkWell(
                         onTap: () {
-                          if (AutoRouter.of(context).canNavigateBack)
-                            AutoRouter.of(context).navigateBack();
+                          if (AutoRouter.of(context).canNavigateBack) AutoRouter.of(context).navigateBack();
                         },
                         child: SizedBox(
                           width: formatWidth(50),
@@ -116,8 +110,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                     ),
                     IconButton(
                       onPressed: () async {
-                        final showBoxAlertToDeleteAccount =
-                            await showCupertinoModalPopup(
+                        final showBoxAlertToDeleteAccount = await showCupertinoModalPopup(
                           context: context,
                           builder: (_) {
                             return CupertinoActionSheet(
@@ -149,8 +142,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   onPressed: () {
                                     Navigator.of(_).pop();
                                     logoutFunction?.call(context, ref) ??
-                                        AutoRouter.of(context)
-                                            .replaceNamed("/logout");
+                                        AutoRouter.of(context).replaceNamed("/logout");
                                   },
                                   child: Text(
                                     "settings.logout".tr(),
@@ -180,10 +172,9 @@ class ResponsiveSettings extends HookConsumerWidget {
                         if (showBoxAlertToDeleteAccount == true) {
                           final rep = await AlertBox.show<bool>(
                             context: context,
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            titleStyle: themeData?.sectionStyle?.copyWith(
-                                fontSize: sp(22), fontWeight: FontWeight.w600),
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                            titleStyle:
+                                themeData?.sectionStyle?.copyWith(fontSize: sp(22), fontWeight: FontWeight.w600),
                             title: "settings.delete-account".tr(),
                             message: "settings.delete-account-confirm".tr(),
                             actions: [
@@ -194,16 +185,14 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   ),
                               (_) => CTA.secondary(
                                     textButton: "utils.no".tr(),
-                                    border:
-                                        Border.all(color: Colors.transparent),
+                                    border: Border.all(color: Colors.transparent),
                                     width: formatWidth(207),
                                     onTap: () => Navigator.of(_).pop(false),
                                   ),
                             ],
                           );
                           if (rep == true) {
-                            if (deleteAccountFunction != null)
-                              return await deleteAccountFunction!(context, ref);
+                            if (deleteAccountFunction != null) return await deleteAccountFunction!(context, ref);
                             AutoRouter.of(context).replaceNamed("/logout");
                           }
                         }
@@ -227,116 +216,111 @@ class ResponsiveSettings extends HookConsumerWidget {
                   InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    overlayColor: MaterialStateProperty.resolveWith(
-                        (states) => Colors.transparent),
-                    onTap: () async {
-                      if (onChangedProfilPictureFunction != null) {
-                        onChangedProfilPictureFunction!.call(context);
-                        return;
-                      }
-                      await showCupertinoModalPopup(
-                        context: context,
-                        builder: (_) {
-                          return CupertinoActionSheet(
-                            cancelButton: CupertinoActionSheetAction(
-                              onPressed: () {
-                                Navigator.of(_).pop(false);
-                              },
-                              child: Text(
-                                "utils.cancel".tr(),
-                                style: TextStyle(
-                                  color: const Color(0xFF007AFF),
-                                  fontSize: sp(20),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            title: Text(
-                              "settings.what-you-want-do".tr(),
-                              style: TextStyle(
-                                fontSize: sp(13),
-                                color: const Color(0xFF8F8F8F),
-                                fontWeight: FontWeight.w600,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            actions: [
-                              CupertinoActionSheetAction(
-                                isDestructiveAction: true,
-                                onPressed: () async {
-                                  final file = await ImagePicker()
-                                      .pickImage(source: ImageSource.camera);
-                                  if (file != null) {
-                                    profilPicture = File(file.path);
+                    overlayColor: MaterialStateProperty.resolveWith((states) => Colors.transparent),
+                    onTap: (!showEditImageProfil)
+                        ? null
+                        : () async {
+                            if (onChangedProfilPictureFunction != null) {
+                              onChangedProfilPictureFunction!.call(context);
+                              return;
+                            }
+                            await showCupertinoModalPopup(
+                              context: context,
+                              builder: (_) {
+                                return CupertinoActionSheet(
+                                  cancelButton: CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.of(_).pop(false);
+                                    },
+                                    child: Text(
+                                      "utils.cancel".tr(),
+                                      style: TextStyle(
+                                        color: const Color(0xFF007AFF),
+                                        fontSize: sp(20),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    "settings.what-you-want-do".tr(),
+                                    style: TextStyle(
+                                      fontSize: sp(13),
+                                      color: const Color(0xFF8F8F8F),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: [
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () async {
+                                        final file = await ImagePicker().pickImage(source: ImageSource.camera);
+                                        if (file != null) {
+                                          profilPicture = File(file.path);
 
-                                    /// Upload files to firebase storage
-                                    final __ = await FirebaseStorageController()
-                                        .downloadUrl(
-                                            profilPicture!,
-                                            FirebaseAuth
-                                                .instance.currentUser!.uid);
-                                    Navigator.of(_).pop(true);
-                                  }
-                                },
-                                child: Text(
-                                  "settings.take-picture".tr(),
-                                  style: TextStyle(
-                                    color: const Color(0xFF007AFF),
-                                    fontSize: sp(20),
-                                  ),
-                                ),
-                              ),
-                              //Bibliothèque
-                              CupertinoActionSheetAction(
-                                isDestructiveAction: true,
-                                onPressed: () async {
-                                  File? image =
-                                      await FirebaseStorageController()
-                                          .selectFile(FirebaseAuth
-                                              .instance.currentUser!.uid);
-                                  if (image != null) {
-                                    profilPicture = image;
-                                  }
-                                  Navigator.of(_).pop(true);
-                                },
-                                child: Text(
-                                  "settings.modify-picture".tr(),
-                                  style: TextStyle(
-                                    color: const Color(0xFF007AFF),
-                                    fontSize: sp(20),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                      // if (showBoxAlertToModifyProfilPicture == true) {
-                      //   final rep = await AlertBox.show<bool>(
-                      //     context: context,
-                      //     title: "settings.modify-picture".tr(),
-                      //     message: "settings.modify-picture-confirm".tr(),
-                      //     actions: [
-                      //       (_) => CTA.primary(
-                      //             textButton: "utils.yes".tr(),
-                      //             width: formatWidth(207),
-                      //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
-                      //             onTap: () => Navigator.of(_).pop(true),
-                      //           ),
-                      //       (_) => CTA.secondary(
-                      //             textButton: "utils.non".tr(),
-                      //             width: formatWidth(207),
-                      //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
-                      //             onTap: () => Navigator.of(_).pop(false),
-                      //           ),
-                      //     ],
-                      //   );
-                      //   if (rep == true) {
-                      //     if (deleteAccountFunction != null) await deleteAccountFunction!();
-                      //     AutoRouter.of(context).replaceNamed("/logout");
-                      //   }
-                      // }
-                    },
+                                          /// Upload files to firebase storage
+                                          final __ = await FirebaseStorageController()
+                                              .downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
+                                          Navigator.of(_).pop(true);
+                                        }
+                                      },
+                                      child: Text(
+                                        "settings.take-picture".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                        ),
+                                      ),
+                                    ),
+                                    //Bibliothèque
+                                    CupertinoActionSheetAction(
+                                      isDestructiveAction: true,
+                                      onPressed: () async {
+                                        File? image = await FirebaseStorageController()
+                                            .selectFile(FirebaseAuth.instance.currentUser!.uid);
+                                        if (image != null) {
+                                          profilPicture = image;
+                                        }
+                                        Navigator.of(_).pop(true);
+                                      },
+                                      child: Text(
+                                        "settings.modify-picture".tr(),
+                                        style: TextStyle(
+                                          color: const Color(0xFF007AFF),
+                                          fontSize: sp(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            // if (showBoxAlertToModifyProfilPicture == true) {
+                            //   final rep = await AlertBox.show<bool>(
+                            //     context: context,
+                            //     title: "settings.modify-picture".tr(),
+                            //     message: "settings.modify-picture-confirm".tr(),
+                            //     actions: [
+                            //       (_) => CTA.primary(
+                            //             textButton: "utils.yes".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.white, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(true),
+                            //           ),
+                            //       (_) => CTA.secondary(
+                            //             textButton: "utils.non".tr(),
+                            //             width: formatWidth(207),
+                            //             textButtonStyle: TextStyle(color: Colors.black, fontSize: sp(14)),
+                            //             onTap: () => Navigator.of(_).pop(false),
+                            //           ),
+                            //     ],
+                            //   );
+                            //   if (rep == true) {
+                            //     if (deleteAccountFunction != null) await deleteAccountFunction!();
+                            //     AutoRouter.of(context).replaceNamed("/logout");
+                            //   }
+                            // }
+                          },
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -344,8 +328,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             ? Container(
                                 width: formatWidth(92),
                                 height: formatWidth(92),
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
+                                decoration: const BoxDecoration(shape: BoxShape.circle),
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: CachedNetworkImage(
                                   imageUrl: userImage!,
@@ -365,8 +348,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             : Container(
                                 width: formatWidth(92),
                                 height: formatWidth(92),
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
+                                decoration: const BoxDecoration(shape: BoxShape.circle),
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: Image.asset(
                                   "assets/images/img_default_user.png",
@@ -426,9 +408,7 @@ class ResponsiveSettings extends HookConsumerWidget {
           sh(13),
           const Divider(height: .5),
         ],
-        ...nodes
-            .map((e) => _buildSettingsSection(context, e, themeData, ref))
-            .toList(),
+        ...nodes.map((e) => _buildSettingsSection(context, e, themeData, ref)).toList(),
         if (showEditedBy) ...[
           sh(21),
           Center(
@@ -437,22 +417,14 @@ class ResponsiveSettings extends HookConsumerWidget {
                 TextSpan(
                   text: "settings.edited_by".tr(),
                   style: themeData?.titleStyle ??
-                      TextStyle(
-                          fontSize: sp(14),
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500),
+                      TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500),
                 ),
                 TextSpan(
                   text: "kosmos-digital.com",
                   style: (themeData?.titleStyle ??
-                          TextStyle(
-                              fontSize: sp(14),
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500))
+                          TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500))
                       .copyWith(decoration: TextDecoration.underline),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () =>
-                        launchUrl(Uri.parse("https://kosmos-digital.com")),
+                  recognizer: TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse("https://kosmos-digital.com")),
                 ),
               ]),
             ),
@@ -463,10 +435,7 @@ class ResponsiveSettings extends HookConsumerWidget {
   }
 
   _buildSettingsSection(
-      BuildContext context,
-      dz.Tuple2<String, List<SettingsNode>> node,
-      SettingsThemeData? themeData,
-      WidgetRef ref) {
+      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -474,11 +443,8 @@ class ResponsiveSettings extends HookConsumerWidget {
         sh(15),
         Text(
           node.value1.tr(),
-          style: themeData?.sectionStyle ??
-              TextStyle(
-                  fontSize: sp(16),
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black),
+          style:
+              themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
         ),
         sh(3),
         ...node.value2
@@ -496,9 +462,7 @@ class ResponsiveSettings extends HookConsumerWidget {
 }
 
 /// Node builder
-buildSettingsItem(BuildContext context, SettingsNode e,
-    SettingsThemeData? themeData, WidgetRef ref,
-    [int level = 0]) {
+buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? themeData, WidgetRef ref, [int level = 0]) {
   switch (e.type) {
     case SettingsType.personnalData:
       if (e.data!.builder != null) {
@@ -506,47 +470,38 @@ buildSettingsItem(BuildContext context, SettingsNode e,
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         });
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
               ? ref.watch(settingsProvider).isActive(e.tag)
               : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
-              if (getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context)
-                    .navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
-              if (getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context)
-                    .navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             }
           },
@@ -560,28 +515,23 @@ buildSettingsItem(BuildContext context, SettingsNode e,
       }
     case SettingsType.security:
       return SettingsCellule(
-        isActive: getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
             ? ref.watch(settingsProvider).isActive(e.tag)
             : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -608,28 +558,23 @@ buildSettingsItem(BuildContext context, SettingsNode e,
       );
     case SettingsType.payment:
       return SettingsCellule(
-        isActive: getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
             ? ref.watch(settingsProvider).isActive(e.tag)
             : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -656,28 +601,23 @@ buildSettingsItem(BuildContext context, SettingsNode e,
       );
     case SettingsType.share:
       return SettingsCellule(
-        isActive: getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
             ? ref.watch(settingsProvider).isActive(e.tag)
             : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -704,28 +644,23 @@ buildSettingsItem(BuildContext context, SettingsNode e,
       );
     case SettingsType.help:
       return SettingsCellule(
-        isActive: getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
             ? ref.watch(settingsProvider).isActive(e.tag)
             : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -752,28 +687,23 @@ buildSettingsItem(BuildContext context, SettingsNode e,
       );
     case SettingsType.link:
       return SettingsCellule(
-        isActive: getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
             ? ref.watch(settingsProvider).isActive(e.tag)
             : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         },
@@ -788,47 +718,38 @@ buildSettingsItem(BuildContext context, SettingsNode e,
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
           } else if (e.children != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           } else if (e.data?.childBuilder != null) {
-            if (getResponsiveValue(context,
-                defaultValue: true, phone: false, tablet: false)) {
+            if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
               ref.read(settingsProvider).updateNode(level, e.tag);
             } else {
-              AutoRouter.of(context)
-                  .navigateNamed("/dashboard/profile/settings/${e.tag}");
+              AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
             }
           }
         });
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
               ? ref.watch(settingsProvider).isActive(e.tag)
               : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
             } else if (e.children != null) {
-              if (getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context)
-                    .navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             } else if (e.data?.childBuilder != null) {
-              if (getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)) {
+              if (getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)) {
                 ref.read(settingsProvider).updateNode(level, e.tag);
               } else {
-                AutoRouter.of(context)
-                    .navigateNamed("/dashboard/profile/settings/${e.tag}");
+                AutoRouter.of(context).navigateNamed("/dashboard/profile/settings/${e.tag}");
               }
             }
           },
@@ -931,8 +852,7 @@ buildSettingsItem(BuildContext context, SettingsNode e,
               }
             },
           ),
-          isActive: getResponsiveValue(context,
-                  defaultValue: true, phone: false, tablet: false)
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
               ? ref.watch(settingsProvider).isActive(e.tag)
               : false,
           onClick: () async {
@@ -975,8 +895,7 @@ class NodePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SettingsThemeData? themeData = loadThemeData(
-        theme, themeName ?? "settings", () => const SettingsThemeData());
+    final SettingsThemeData? themeData = loadThemeData(theme, themeName ?? "settings", () => const SettingsThemeData());
 
     if (node != null && node!.data?.childBuilder != null) {
       return node!.data!.childBuilder!(context, ref);
@@ -986,9 +905,7 @@ class NodePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (node != null) ...[
-          ...node!.children!
-              .map((e) => _buildSettingsSection(context, e, themeData, ref))
-              .toList(),
+          ...node!.children!.map((e) => _buildSettingsSection(context, e, themeData, ref)).toList(),
         ] else ...[
           Text(
             "settings.node.noNode".tr(),
@@ -1000,10 +917,7 @@ class NodePage extends ConsumerWidget {
   }
 
   _buildSettingsSection(
-      BuildContext context,
-      dz.Tuple2<String, List<SettingsNode>> node,
-      SettingsThemeData? themeData,
-      WidgetRef ref) {
+      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -1016,26 +930,14 @@ class NodePage extends ConsumerWidget {
                 child: Text(
                   node.value1.tr(),
                   style: themeData?.sectionStyle ??
-                      TextStyle(
-                          fontSize: sp(16),
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black),
+                      TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ),
-              if (getResponsiveValue(context,
-                  defaultValue: false, tablet: false, phone: true))
-                Positioned(
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  child: InkWell(
-                    onTap: () => AutoRouter.of(context).navigateBack(),
-                    child: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: themeData?.activeIconColor ?? Colors.black,
-                      size: formatWidth(18),
-                    ),
-                  ),
+              if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true))
+                CTA.back(
+                  width: formatWidth(50),
+                  height: formatWidth(50),
+                  onTap: () => AutoRouter.of(context).navigateBack(),
                 ),
             ],
           ),
