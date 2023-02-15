@@ -86,7 +86,10 @@ class ResponsiveSettings extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Opacity(
-                      opacity: AutoRouter.of(context).canNavigateBack && getResponsiveValue(context, defaultValue: false, tablet: false, phone: true) ? 1 : 0,
+                      opacity: AutoRouter.of(context).canNavigateBack &&
+                              getResponsiveValue(context, defaultValue: false, tablet: false, phone: true)
+                          ? 1
+                          : 0,
                       child: InkWell(
                         onTap: () {
                           if (AutoRouter.of(context).canNavigateBack) {
@@ -142,7 +145,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                                   isDestructiveAction: true,
                                   onPressed: () {
                                     Navigator.of(_).pop();
-                                    logoutFunction?.call(context, ref) ?? AutoRouter.of(context).replaceNamed("/logout");
+                                    logoutFunction?.call(context, ref) ??
+                                        AutoRouter.of(context).replaceNamed("/logout");
                                   },
                                   child: Text(
                                     "settings.logout".tr(),
@@ -173,7 +177,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                           final rep = await AlertBox.show<bool>(
                             context: context,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                            titleStyle: themeData?.sectionStyle?.copyWith(fontSize: sp(22), fontWeight: FontWeight.w600),
+                            titleStyle:
+                                themeData?.sectionStyle?.copyWith(fontSize: sp(22), fontWeight: FontWeight.w600),
                             title: "settings.delete-account".tr(),
                             message: "settings.delete-account-confirm".tr(),
                             actions: [
@@ -211,12 +216,11 @@ class ResponsiveSettings extends HookConsumerWidget {
                   ],
                 ),
                 sh(25),
-                         if (showUserImage) ...[
+                if (showUserImage) ...[
                   InkWell(
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    overlayColor: MaterialStateProperty.resolveWith(
-                        (states) => Colors.transparent),
+                    overlayColor: MaterialStateProperty.resolveWith((states) => Colors.transparent),
                     onTap: (!showEditImageProfil)
                         ? null
                         : () async {
@@ -254,19 +258,13 @@ class ResponsiveSettings extends HookConsumerWidget {
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
                                       onPressed: () async {
-                                        final file = await ImagePicker()
-                                            .pickImage(
-                                                source: ImageSource.camera);
+                                        final file = await ImagePicker().pickImage(source: ImageSource.camera);
                                         if (file != null) {
                                           profilPicture = File(file.path);
 
                                           /// Upload files to firebase storage
-                                          final __ =
-                                              await FirebaseStorageController()
-                                                  .downloadUrl(
-                                                      profilPicture!,
-                                                      FirebaseAuth.instance
-                                                          .currentUser!.uid);
+                                          final __ = await FirebaseStorageController()
+                                              .downloadUrl(profilPicture!, FirebaseAuth.instance.currentUser!.uid);
                                           Navigator.of(_).pop(true);
                                         }
                                       },
@@ -282,10 +280,8 @@ class ResponsiveSettings extends HookConsumerWidget {
                                     CupertinoActionSheetAction(
                                       isDestructiveAction: true,
                                       onPressed: () async {
-                                        File? image =
-                                            await FirebaseStorageController()
-                                                .selectFile(FirebaseAuth
-                                                    .instance.currentUser!.uid);
+                                        File? image = await FirebaseStorageController()
+                                            .selectFile(FirebaseAuth.instance.currentUser!.uid);
                                         if (image != null) {
                                           profilPicture = image;
                                         }
@@ -336,8 +332,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             ? Container(
                                 width: formatWidth(92),
                                 height: formatWidth(92),
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
+                                decoration: const BoxDecoration(shape: BoxShape.circle),
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: CachedNetworkImage(
                                   imageUrl: userImage!,
@@ -357,8 +352,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                             : Container(
                                 width: formatWidth(92),
                                 height: formatWidth(92),
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
+                                decoration: const BoxDecoration(shape: BoxShape.circle),
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: Image.asset(
                                   "assets/images/img_default_user.png",
@@ -426,11 +420,13 @@ class ResponsiveSettings extends HookConsumerWidget {
               text: TextSpan(children: [
                 TextSpan(
                   text: "settings.edited_by".tr(),
-                  style: themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500),
+                  style: themeData?.titleStyle ??
+                      TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500),
                 ),
                 TextSpan(
                   text: "kosmos-digital.com",
-                  style: (themeData?.titleStyle ?? TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500))
+                  style: (themeData?.titleStyle ??
+                          TextStyle(fontSize: sp(14), color: Colors.black, fontWeight: FontWeight.w500))
                       .copyWith(decoration: TextDecoration.underline),
                   recognizer: TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse("https://kosmos-digital.com")),
                 ),
@@ -442,7 +438,8 @@ class ResponsiveSettings extends HookConsumerWidget {
     );
   }
 
-  _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
+  _buildSettingsSection(
+      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -450,7 +447,8 @@ class ResponsiveSettings extends HookConsumerWidget {
         sh(15),
         Text(
           node.value1.tr(),
-          style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+          style:
+              themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
         ),
         sh(3),
         ...node.value2
@@ -491,7 +489,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         });
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+              ? ref.watch(settingsProvider).isActive(e.tag)
+              : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
@@ -519,7 +519,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       }
     case SettingsType.security:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+            ? ref.watch(settingsProvider).isActive(e.tag)
+            : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -560,7 +562,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.payment:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+            ? ref.watch(settingsProvider).isActive(e.tag)
+            : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -601,7 +605,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.share:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+            ? ref.watch(settingsProvider).isActive(e.tag)
+            : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -642,7 +648,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.help:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+            ? ref.watch(settingsProvider).isActive(e.tag)
+            : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -683,7 +691,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
       );
     case SettingsType.link:
       return SettingsCellule(
-        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+        isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+            ? ref.watch(settingsProvider).isActive(e.tag)
+            : false,
         onClick: () async {
           if (e.data?.onTap != null) {
             await e.data!.onTap!(context, ref);
@@ -727,7 +737,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
         });
       } else {
         return SettingsCellule(
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+              ? ref.watch(settingsProvider).isActive(e.tag)
+              : false,
           onClick: () async {
             if (e.data?.onTap != null) {
               await e.data!.onTap!(context, ref);
@@ -844,7 +856,9 @@ buildSettingsItem(BuildContext context, SettingsNode e, SettingsThemeData? theme
               }
             },
           ),
-          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false) ? ref.watch(settingsProvider).isActive(e.tag) : false,
+          isActive: getResponsiveValue(context, defaultValue: true, phone: false, tablet: false)
+              ? ref.watch(settingsProvider).isActive(e.tag)
+              : false,
           onClick: () async {
             if (e.data?.onSwicth != null) {
               await e.data!.onSwicth!(context, ref, !e.data!.switchValue!(ref));
@@ -913,7 +927,8 @@ class NodePage extends ConsumerWidget {
     );
   }
 
-  _buildSettingsSection(BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
+  _buildSettingsSection(
+      BuildContext context, dz.Tuple2<String, List<SettingsNode>> node, SettingsThemeData? themeData, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -931,10 +946,13 @@ class NodePage extends ConsumerWidget {
                 ),
               ),
               if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true))
-                CTA.back(
-                  width: formatWidth(50),
-                  height: formatWidth(50),
-                  onTap: () => AutoRouter.of(context).navigateBack(),
+                Padding(
+                  padding: EdgeInsets.only(left: themeData?.paddingLeftIcon ?? 10),
+                  child: CTA.back(
+                    width: formatWidth(50),
+                    height: formatWidth(50),
+                    onTap: () => AutoRouter.of(context).navigateBack(),
+                  ),
                 ),
             ],
           ),

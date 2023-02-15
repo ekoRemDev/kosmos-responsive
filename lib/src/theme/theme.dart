@@ -11,7 +11,7 @@ class SettingsThemeData {
   final Color? iconColor;
   final Color? actionIconColor;
   final Color? activeIconColor;
-
+  final double? paddingLeftIcon;
 
   ///Only for Web
   final Color? iconActiveColor;
@@ -20,6 +20,7 @@ class SettingsThemeData {
   const SettingsThemeData({
     this.emailStyle,
     this.nameStyle,
+    this.paddingLeftIcon,
     this.sectionStyle,
     this.subTitleStyle,
     this.titleStyle,
