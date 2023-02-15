@@ -926,28 +926,15 @@ class NodePage extends ConsumerWidget {
               Center(
                 child: Text(
                   node.value1.tr(),
-                  style: themeData?.sectionStyle ?? TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
+                  style: themeData?.sectionStyle ??
+                      TextStyle(fontSize: sp(16), fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ),
               if (getResponsiveValue(context, defaultValue: false, tablet: false, phone: true))
-                Positioned(
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  child: InkWell(
-                    onTap: () => AutoRouter.of(context).navigateBack(),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: formatWidth(27.5)),
-                      height: formatHeight(50),
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: themeData?.actionIconColor ?? Colors.black,
-                          size: formatWidth(20),
-                        ),
-                      ),
-                    ),
-                  ),
+                CTA.back(
+                  width: formatWidth(50),
+                  height: formatWidth(50),
+                  onTap: () => AutoRouter.of(context).navigateBack(),
                 ),
             ],
           ),
