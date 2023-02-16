@@ -362,6 +362,7 @@ class ResponsiveSettings extends HookConsumerWidget {
                         )
                     ],
                   ),
+                  if (showEditImageProfil) sh(4),
                   sh(5.4),
                 ],
                 if (userName != null) ...[
