@@ -48,14 +48,15 @@ dependencies:
   ##################
   core_kosmos:
     git:
-      publish_to: none
-      url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
+      publish_to: 'none'
+      url: https://github.com/ekoRemDev/kosmos-core.git
       ref: main
 
   ui_kosmos_v4:
     git:
       publish_to: none
-      url: https://gitlab+deploy-token-1156709:fR3FsBtxfwwKuM43HyWp@gitlab.com/package16/package-ui-kosmos.git
+      # url: https://gitlab+deploy-token-1156709:fR3FsBtxfwwKuM43HyWp@gitlab.com/package16/package-ui-kosmos.git
+      url: https://github.com/ekoRemDev/kosmos-ui.git
       ref: main
   firebase_storage: ^10.3.9
   image_picker: ^0.8.5+3
